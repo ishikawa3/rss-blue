@@ -4,6 +4,7 @@ import SwiftUI
 struct TimelineView: View {
     let selection: FeedSelection?
     @Binding var selectedArticle: Article?
+    var onRefresh: (() async -> Void)?
     @Query(sort: \Article.publishedDate, order: .reverse) private var allArticles: [Article]
 
     private var articles: [Article] {
@@ -59,7 +60,7 @@ struct TimelineView: View {
         }
         #if os(iOS)
             .refreshable {
-                // TODO: Implement refresh (Issue #7)
+                await onRefresh?()
             }
         #endif
     }
@@ -223,6 +224,6 @@ struct ArticleRow: View {
 }
 
 #Preview {
-    TimelineView(selection: .allUnread, selectedArticle: .constant(nil))
+    TimelineView(selection: .allUnread, selectedArticle: .constant(nil), onRefresh: nil)
         .modelContainer(for: [Feed.self, Article.self], inMemory: true)
 }

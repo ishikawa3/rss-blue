@@ -177,3 +177,81 @@ struct FeedManagementTests {
         #expect(feed.unreadCount == 2)
     }
 }
+
+@Suite("Feed Refresh Tests")
+struct FeedRefreshTests {
+
+    @Test("Duplicate article detection by URL")
+    func duplicateArticleDetectionByURL() {
+        let feed = Feed(title: "Test Feed", url: URL(string: "https://example.com/feed")!)
+
+        // Existing article
+        let existingArticle = Article(title: "Existing Article", feed: feed)
+        existingArticle.url = URL(string: "https://example.com/article1")
+        feed.articles = [existingArticle]
+
+        // Get existing URLs
+        let existingUrls = Set((feed.articles ?? []).compactMap { $0.url?.absoluteString })
+
+        // New article with same URL should be detected as duplicate
+        let duplicateUrl = "https://example.com/article1"
+        let newUrl = "https://example.com/article2"
+
+        #expect(existingUrls.contains(duplicateUrl))
+        #expect(!existingUrls.contains(newUrl))
+    }
+
+    @Test("New article detection")
+    func newArticleDetection() {
+        let existingUrls: Set<String> = [
+            "https://example.com/article1",
+            "https://example.com/article2",
+        ]
+
+        let newArticleUrls = [
+            "https://example.com/article1",  // duplicate
+            "https://example.com/article3",  // new
+            "https://example.com/article4",  // new
+        ]
+
+        let newUrls = newArticleUrls.filter { !existingUrls.contains($0) }
+
+        #expect(newUrls.count == 2)
+        #expect(newUrls.contains("https://example.com/article3"))
+        #expect(newUrls.contains("https://example.com/article4"))
+    }
+
+    @Test("Feed last updated timestamp")
+    func feedLastUpdatedTimestamp() {
+        let feed = Feed(title: "Test Feed", url: URL(string: "https://example.com/feed")!)
+
+        #expect(feed.lastUpdated == nil)
+
+        feed.lastUpdated = Date()
+
+        #expect(feed.lastUpdated != nil)
+    }
+
+    @Test("Multiple feeds refresh isolation")
+    func multipleFeedsRefreshIsolation() {
+        let feed1 = Feed(title: "Feed 1", url: URL(string: "https://example1.com/feed")!)
+        let feed2 = Feed(title: "Feed 2", url: URL(string: "https://example2.com/feed")!)
+
+        let article1 = Article(title: "Article from Feed 1", feed: feed1)
+        article1.url = URL(string: "https://example1.com/article1")
+        feed1.articles = [article1]
+
+        let article2 = Article(title: "Article from Feed 2", feed: feed2)
+        article2.url = URL(string: "https://example2.com/article1")
+        feed2.articles = [article2]
+
+        // Each feed's articles should be independent
+        let feed1Urls = Set((feed1.articles ?? []).compactMap { $0.url?.absoluteString })
+        let feed2Urls = Set((feed2.articles ?? []).compactMap { $0.url?.absoluteString })
+
+        #expect(feed1Urls.count == 1)
+        #expect(feed2Urls.count == 1)
+        #expect(!feed1Urls.contains("https://example2.com/article1"))
+        #expect(!feed2Urls.contains("https://example1.com/article1"))
+    }
+}

@@ -140,6 +140,95 @@ final class FeedService: ObservableObject {
 
         return try await parserService.fetchAndParse(url: url)
     }
+
+    // MARK: - Refresh Feeds
+
+    /// Refreshes all feeds and returns the count of new articles
+    /// - Returns: The total number of new articles added
+    func refreshAllFeeds() async throws -> Int {
+        isLoading = true
+        error = nil
+
+        defer { isLoading = false }
+
+        let descriptor = FetchDescriptor<Feed>()
+        let feeds = try modelContext.fetch(descriptor)
+
+        var totalNewArticles = 0
+        var lastError: FeedServiceError?
+
+        for feed in feeds {
+            do {
+                let newCount = try await refreshFeed(feed)
+                totalNewArticles += newCount
+            } catch let err as FeedServiceError {
+                lastError = err
+                // Continue refreshing other feeds even if one fails
+            } catch {
+                lastError = .networkError(error.localizedDescription)
+            }
+        }
+
+        // If all feeds failed, throw the last error
+        if totalNewArticles == 0, let err = lastError {
+            self.error = err
+            throw err
+        }
+
+        return totalNewArticles
+    }
+
+    /// Refreshes a single feed and returns the count of new articles
+    /// - Parameter feed: The feed to refresh
+    /// - Returns: The number of new articles added
+    @discardableResult
+    func refreshFeed(_ feed: Feed) async throws -> Int {
+        let parseResult: ParsedFeed
+        do {
+            parseResult = try await parserService.fetchAndParse(url: feed.url)
+        } catch let parserError as FeedParserError {
+            throw FeedServiceError.parsingFailed(parserError.localizedDescription)
+        } catch {
+            throw FeedServiceError.networkError(error.localizedDescription)
+        }
+
+        // Update feed metadata
+        feed.title = parseResult.title
+        feed.feedDescription = parseResult.description
+        feed.homePageURL = parseResult.homePageURL
+        feed.lastUpdated = Date()
+
+        // Get existing article IDs
+        let existingIds = Set(
+            (feed.articles ?? []).compactMap { article -> String? in
+                // Use URL as unique identifier since that's more reliable
+                article.url?.absoluteString
+            })
+
+        var newArticleCount = 0
+
+        // Add only new articles
+        for articleData in parseResult.articles {
+            let articleId = articleData.url?.absoluteString ?? articleData.id
+
+            if !existingIds.contains(articleId) {
+                let article = Article(title: articleData.title, feed: feed)
+                article.url = articleData.url
+                article.summary = articleData.summary
+                article.contentHTML = articleData.contentHTML
+                article.author = articleData.author
+                article.publishedDate = articleData.publishedDate
+                article.id = UUID(uuidString: articleData.id) ?? UUID()
+
+                modelContext.insert(article)
+                newArticleCount += 1
+            }
+        }
+
+        try modelContext.save()
+
+        return newArticleCount
+    }
 }
 
 // MARK: - Errors
