@@ -69,6 +69,11 @@ struct ContentView: View {
                 Text("No new articles found")
             }
         }
+        .onChange(of: selectedArticle) { _, newValue in
+            if let article = newValue {
+                article.isRead = true
+            }
+        }
     }
 
     @MainActor

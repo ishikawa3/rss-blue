@@ -186,10 +186,6 @@ struct ArticleRow: View {
             }
         }
         .padding(.vertical, 4)
-        .contentShape(Rectangle())
-        .onTapGesture {
-            article.isRead = true
-        }
         #if os(iOS)
             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                 Button {
