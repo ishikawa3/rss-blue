@@ -7,7 +7,10 @@ struct TimelineView: View {
     var onRefresh: (() async -> Void)?
     @Query(sort: \Article.publishedDate, order: .reverse) private var allArticles: [Article]
 
-    private var articles: [Article] {
+    @State private var searchText: String = ""
+    @State private var isSearching: Bool = false
+
+    private var filteredArticles: [Article] {
         guard let selection = selection else { return allArticles }
 
         switch selection {
@@ -32,6 +35,11 @@ struct TimelineView: View {
         }
     }
 
+    private var articles: [Article] {
+        guard !searchText.isEmpty else { return filteredArticles }
+        return filteredArticles.filter { SearchService.matches(article: $0, query: searchText) }
+    }
+
     private var navigationTitle: String {
         selection?.title ?? "All Articles"
     }
@@ -39,14 +47,22 @@ struct TimelineView: View {
     var body: some View {
         List(selection: $selectedArticle) {
             ForEach(articles) { article in
-                ArticleRow(article: article)
+                ArticleRow(article: article, searchQuery: searchText)
                     .tag(article as Article?)
             }
         }
         .listStyle(.plain)
         .navigationTitle(navigationTitle)
+        .searchable(
+            text: $searchText,
+            isPresented: $isSearching,
+            placement: .automatic,
+            prompt: "Search articles"
+        )
         .overlay {
-            if articles.isEmpty {
+            if articles.isEmpty && !searchText.isEmpty {
+                ContentUnavailableView.search(text: searchText)
+            } else if articles.isEmpty {
                 ContentUnavailableView(
                     emptyStateTitle,
                     systemImage: emptyStateImage,
@@ -123,6 +139,7 @@ struct TimelineView: View {
 
 struct ArticleRow: View {
     let article: Article
+    var searchQuery: String = ""
     @Environment(\.modelContext) private var modelContext
 
     var body: some View {
@@ -147,14 +164,14 @@ struct ArticleRow: View {
                 }
             }
 
-            Text(article.title)
+            highlightedText(article.title, query: searchQuery)
                 .font(.headline)
                 .fontWeight(article.isRead ? .regular : .semibold)
                 .foregroundStyle(article.isRead ? .secondary : .primary)
                 .lineLimit(2)
 
             if let summary = article.summary {
-                Text(summary)
+                highlightedText(summary, query: searchQuery)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .lineLimit(2)
@@ -228,6 +245,45 @@ struct ArticleRow: View {
                 }
             }
         }
+    }
+
+    /// 検索クエリにマッチした部分をハイライト表示するテキストを生成
+    @ViewBuilder
+    private func highlightedText(_ text: String, query: String) -> some View {
+        if query.isEmpty {
+            Text(text)
+        } else {
+            let ranges = SearchService.findMatchRanges(in: text, for: query)
+            if ranges.isEmpty {
+                Text(text)
+            } else {
+                Text(buildAttributedString(text: text, ranges: ranges))
+            }
+        }
+    }
+
+    /// マッチした範囲をハイライトしたAttributedStringを生成
+    private func buildAttributedString(text: String, ranges: [Range<String.Index>])
+        -> AttributedString
+    {
+        var attributedString = AttributedString(text)
+
+        for range in ranges {
+            // String.IndexをAttributedString.Indexに変換
+            let startOffset = text.distance(from: text.startIndex, to: range.lowerBound)
+            let endOffset = text.distance(from: text.startIndex, to: range.upperBound)
+
+            let attrStart = attributedString.index(
+                attributedString.startIndex, offsetByCharacters: startOffset)
+            let attrEnd = attributedString.index(
+                attributedString.startIndex, offsetByCharacters: endOffset)
+
+            let attrRange = attrStart..<attrEnd
+            attributedString[attrRange].backgroundColor = .yellow.opacity(0.3)
+            attributedString[attrRange].foregroundColor = .primary
+        }
+
+        return attributedString
     }
 }
 
