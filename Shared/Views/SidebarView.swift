@@ -206,6 +206,20 @@ struct FolderRow: View {
                 }
             }
             .tag(FeedSelection.folder(folder))
+            .contextMenu {
+                Button(action: {
+                    newName = folder.name
+                    isRenaming = true
+                }) {
+                    Label("Rename", systemImage: "pencil")
+                }
+
+                Divider()
+
+                Button(role: .destructive, action: { showDeleteConfirmation = true }) {
+                    Label("Delete Folder", systemImage: "trash")
+                }
+            }
         }
         .animation(nil, value: folder.isExpanded)
         #if os(macOS)
@@ -221,20 +235,6 @@ struct FolderRow: View {
                 }
             }
         #endif
-        .contextMenu {
-            Button(action: {
-                newName = folder.name
-                isRenaming = true
-            }) {
-                Label("Rename", systemImage: "pencil")
-            }
-
-            Divider()
-
-            Button(role: .destructive, action: { showDeleteConfirmation = true }) {
-                Label("Delete Folder", systemImage: "trash")
-            }
-        }
         .alert("Rename Folder", isPresented: $isRenaming) {
             TextField("Folder Name", text: $newName)
             Button("Cancel", role: .cancel) {}
