@@ -3,11 +3,17 @@ import SwiftUI
 
 struct SidebarView: View {
     @Binding var selection: FeedSelection?
-    @Query(sort: \Feed.title) private var feeds: [Feed]
+    @Query(sort: \Folder.sortOrder) private var folders: [Folder]
+    @Query(
+        filter: #Predicate<Feed> { $0.folder == nil },
+        sort: \Feed.sortOrder
+    ) private var uncategorizedFeeds: [Feed]
     @Query private var allArticles: [Article]
     @Environment(\.modelContext) private var modelContext
     @State private var isAddingFeed = false
+    @State private var isAddingFolder = false
     @State private var showSettings = false
+    @State private var newFolderName = ""
 
     private var unreadCount: Int {
         allArticles.filter { !$0.isRead }.count
@@ -54,11 +60,17 @@ struct SidebarView: View {
             }
 
             Section("Feeds") {
-                ForEach(feeds) { feed in
+                // Folders
+                ForEach(folders) { folder in
+                    FolderRow(folder: folder, selection: $selection)
+                }
+
+                // Uncategorized feeds
+                ForEach(uncategorizedFeeds) { feed in
                     FeedRow(feed: feed)
                         .tag(FeedSelection.feed(feed))
                 }
-                .onDelete(perform: deleteFeeds)
+                .onDelete(perform: deleteUncategorizedFeeds)
             }
         }
         #if os(macOS)
@@ -72,6 +84,12 @@ struct SidebarView: View {
                     .foregroundStyle(.secondary)
 
                     Spacer()
+
+                    Button(action: { isAddingFolder = true }) {
+                        Label("New Folder", systemImage: "folder.badge.plus")
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(.secondary)
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 8)
@@ -89,14 +107,32 @@ struct SidebarView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { isAddingFeed = true }) {
-                        Label("Add Feed", systemImage: "plus")
+                    Menu {
+                        Button(action: { isAddingFeed = true }) {
+                            Label("Add Feed", systemImage: "plus")
+                        }
+                        Button(action: { isAddingFolder = true }) {
+                            Label("New Folder", systemImage: "folder.badge.plus")
+                        }
+                    } label: {
+                        Label("Add", systemImage: "plus")
                     }
                 }
             #endif
         }
         .sheet(isPresented: $isAddingFeed) {
             AddFeedView()
+        }
+        .alert("New Folder", isPresented: $isAddingFolder) {
+            TextField("Folder Name", text: $newFolderName)
+            Button("Cancel", role: .cancel) {
+                newFolderName = ""
+            }
+            Button("Create") {
+                createFolder()
+            }
+        } message: {
+            Text("Enter a name for the new folder.")
         }
         #if os(iOS)
             .sheet(isPresented: $showSettings) {
@@ -114,11 +150,122 @@ struct SidebarView: View {
         #endif
     }
 
-    private func deleteFeeds(at offsets: IndexSet) {
+    private func deleteUncategorizedFeeds(at offsets: IndexSet) {
         for index in offsets {
-            modelContext.delete(feeds[index])
+            modelContext.delete(uncategorizedFeeds[index])
         }
     }
+
+    private func createFolder() {
+        guard !newFolderName.isEmpty else { return }
+        let folderService = FolderService(modelContext: modelContext)
+        try? folderService.createFolder(name: newFolderName)
+        newFolderName = ""
+    }
+}
+
+// MARK: - Folder Row
+
+struct FolderRow: View {
+    @Bindable var folder: Folder
+    @Binding var selection: FeedSelection?
+    @Environment(\.modelContext) private var modelContext
+    @State private var isRenaming = false
+    @State private var newName = ""
+    @State private var showDeleteConfirmation = false
+
+    var body: some View {
+        DisclosureGroup(isExpanded: $folder.isExpanded) {
+            ForEach(folder.feeds ?? []) { feed in
+                FeedRow(feed: feed)
+                    .tag(FeedSelection.feed(feed))
+            }
+        } label: {
+            HStack {
+                Image(systemName: folder.isExpanded ? "folder.fill" : "folder")
+                    .foregroundStyle(.brown)
+
+                Text(folder.name)
+
+                Spacer()
+
+                if folder.unreadCount > 0 {
+                    Text("\(folder.unreadCount)")
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(.brown.opacity(0.15))
+                        .foregroundStyle(.brown)
+                        .clipShape(Capsule())
+                }
+            }
+            .tag(FeedSelection.folder(folder))
+        }
+        #if os(macOS)
+            .dropDestination(for: String.self) { items, _ in
+                handleDrop(feedIds: items)
+            }
+        #endif
+        .contextMenu {
+            Button(action: {
+                newName = folder.name
+                isRenaming = true
+            }) {
+                Label("Rename", systemImage: "pencil")
+            }
+
+            Divider()
+
+            Button(role: .destructive, action: { showDeleteConfirmation = true }) {
+                Label("Delete Folder", systemImage: "trash")
+            }
+        }
+        .alert("Rename Folder", isPresented: $isRenaming) {
+            TextField("Folder Name", text: $newName)
+            Button("Cancel", role: .cancel) {}
+            Button("Rename") {
+                renameFolder()
+            }
+        }
+        .confirmationDialog(
+            "Delete \"\(folder.name)\"?",
+            isPresented: $showDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Delete", role: .destructive) {
+                deleteFolder()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Feeds in this folder will be moved to Uncategorized.")
+        }
+    }
+
+    private func renameFolder() {
+        guard !newName.isEmpty else { return }
+        let folderService = FolderService(modelContext: modelContext)
+        try? folderService.renameFolder(folder, to: newName)
+    }
+
+    private func deleteFolder() {
+        let folderService = FolderService(modelContext: modelContext)
+        try? folderService.deleteFolder(folder)
+    }
+
+    #if os(macOS)
+        private func handleDrop(feedIds: [String]) -> Bool {
+            let descriptor = FetchDescriptor<Feed>()
+            guard let allFeeds = try? modelContext.fetch(descriptor) else { return false }
+
+            let feedsToMove = allFeeds.filter { feedIds.contains($0.id.uuidString) }
+            guard !feedsToMove.isEmpty else { return false }
+
+            let folderService = FolderService(modelContext: modelContext)
+            try? folderService.moveFeeds(feedsToMove, to: folder)
+            return true
+        }
+    #endif
 }
 
 struct SmartFeedRow: View {
@@ -153,6 +300,7 @@ struct SmartFeedRow: View {
 struct FeedRow: View {
     let feed: Feed
     @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Folder.sortOrder) private var folders: [Folder]
     @State private var showDeleteConfirmation = false
 
     var body: some View {
@@ -178,9 +326,37 @@ struct FeedRow: View {
                     .clipShape(Capsule())
             }
         }
+        #if os(macOS)
+            .draggable(feed.id.uuidString)
+        #endif
         .contextMenu {
             Button(action: { markAllAsRead() }) {
                 Label("Mark All as Read", systemImage: "checkmark.circle")
+            }
+
+            Divider()
+
+            // Move to folder menu
+            Menu {
+                Button(action: { moveFeed(to: nil) }) {
+                    Label("Uncategorized", systemImage: "tray")
+                    if feed.folder == nil {
+                        Image(systemName: "checkmark")
+                    }
+                }
+
+                Divider()
+
+                ForEach(folders) { folder in
+                    Button(action: { moveFeed(to: folder) }) {
+                        Label(folder.name, systemImage: "folder")
+                        if feed.folder?.id == folder.id {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            } label: {
+                Label("Move to Folder", systemImage: "folder")
             }
 
             Divider()
@@ -221,6 +397,11 @@ struct FeedRow: View {
         }
     }
 
+    private func moveFeed(to folder: Folder?) {
+        let folderService = FolderService(modelContext: modelContext)
+        try? folderService.moveFeed(feed, to: folder)
+    }
+
     private func copyFeedURL() {
         #if os(macOS)
             NSPasteboard.general.clearContents()
@@ -237,5 +418,5 @@ struct FeedRow: View {
 
 #Preview {
     SidebarView(selection: .constant(.allUnread))
-        .modelContainer(for: [Feed.self, Article.self], inMemory: true)
+        .modelContainer(for: [Feed.self, Article.self, Folder.self], inMemory: true)
 }

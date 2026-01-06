@@ -6,6 +6,7 @@ enum FeedSelection: Hashable {
     case today
     case starred
     case feed(Feed)
+    case folder(Folder)
 
     var title: String {
         switch self {
@@ -17,6 +18,8 @@ enum FeedSelection: Hashable {
             return "Starred"
         case .feed(let feed):
             return feed.title
+        case .folder(let folder):
+            return folder.name
         }
     }
 
@@ -30,6 +33,8 @@ enum FeedSelection: Hashable {
             return "star.fill"
         case .feed:
             return "dot.radiowaves.up.forward"
+        case .folder:
+            return "folder"
         }
     }
 }

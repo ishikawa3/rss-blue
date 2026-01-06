@@ -23,6 +23,12 @@ struct TimelineView: View {
             return allArticles.filter { $0.isStarred }
         case .feed(let feed):
             return allArticles.filter { $0.feed == feed }
+        case .folder(let folder):
+            let folderFeeds = folder.feeds ?? []
+            return allArticles.filter { article in
+                guard let feedId = article.feed?.id else { return false }
+                return folderFeeds.contains { $0.id == feedId }
+            }
         }
     }
 
@@ -75,6 +81,8 @@ struct TimelineView: View {
             return "No Starred Articles"
         case .feed:
             return "No Articles"
+        case .folder:
+            return "No Articles"
         case nil:
             return "No Articles"
         }
@@ -88,7 +96,7 @@ struct TimelineView: View {
             return "calendar"
         case .starred:
             return "star"
-        case .feed, nil:
+        case .feed, .folder, nil:
             return "newspaper"
         }
     }
@@ -101,7 +109,7 @@ struct TimelineView: View {
             return "Check back later for new articles"
         case .starred:
             return "Star articles to save them here"
-        case .feed, nil:
+        case .feed, .folder, nil:
             return "Add a feed to get started"
         }
     }

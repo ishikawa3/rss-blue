@@ -10,9 +10,12 @@ final class Feed {
     var feedDescription: String?
     var iconData: Data?
     var lastUpdated: Date?
+    var sortOrder: Int = 0
 
     @Relationship(deleteRule: .cascade, inverse: \Article.feed)
     var articles: [Article]?
+
+    var folder: Folder?
 
     var unreadCount: Int {
         articles?.filter { !$0.isRead }.count ?? 0

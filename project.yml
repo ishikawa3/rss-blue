@@ -26,6 +26,7 @@ targets:
         excludes:
           - "**/*Tests*"
       - path: macOS
+      - path: Resources/Assets.xcassets
     entitlements:
       path: Resources/RSSBlue.entitlements
     settings:
@@ -37,6 +38,7 @@ targets:
       INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.news
       INFOPLIST_KEY_NSHumanReadableCopyright: "Copyright © 2026 ishikawa. All rights reserved."
       CODE_SIGN_ENTITLEMENTS: Resources/RSSBlue.entitlements
+      CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: YES
       ENABLE_HARDENED_RUNTIME: YES
     info:
       path: Resources/Info-macOS.plist
@@ -59,6 +61,7 @@ targets:
         excludes:
           - "**/*Tests*"
       - path: iOS
+      - path: Resources/Assets.xcassets
     entitlements:
       path: Resources/RSSBlue-iOS.entitlements
     settings:

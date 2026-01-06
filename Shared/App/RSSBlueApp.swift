@@ -22,14 +22,17 @@ struct RSSBlueApp: App {
                 // Use in-memory store for tests
                 config = ModelConfiguration(isStoredInMemoryOnly: true)
             } else {
-                // Use CloudKit for production
-                config = ModelConfiguration(
-                    cloudKitDatabase: .private("iCloud.com.ishikawa.rssblue")
-                )
+                // TODO: Re-enable CloudKit after setting up Apple Developer account
+                // config = ModelConfiguration(
+                //     cloudKitDatabase: .private("iCloud.com.ishikawa.rssblue")
+                // )
+
+                // Use local storage for now
+                config = ModelConfiguration()
             }
 
             modelContainer = try ModelContainer(
-                for: Feed.self, Article.self,
+                for: Feed.self, Article.self, Folder.self,
                 configurations: config
             )
         } catch {

@@ -31,12 +31,17 @@
 		5E32136B63E51D732E6AE905 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */; };
 		5E3544ACD05145F754445D37 /* FeedParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD08C4D12FDBAC27044C0 /* FeedParserTests.swift */; };
 		7277AD393154425D9DDE8EDF /* OPMLServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D15AEF20195602CCCE686C /* OPMLServiceTests.swift */; };
+		7B57B5E5576B6CC273D44DB2 /* FolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361B392B30952BA235F72DC0 /* FolderTests.swift */; };
+		7BD935EF1CF4044C7760BFB0 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E9ACFE2EE584C25C9F69FD /* Folder.swift */; };
 		7ECA5BDC5DEA764286F9CF58 /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080379AD3AAB030CDCF8F35B /* String+HTML.swift */; };
+		940E40963A047EF22CE39CAC /* FolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361B392B30952BA235F72DC0 /* FolderTests.swift */; };
 		A6046D3C0B867D1498E539CC /* AddFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83CCC409DBD7F929810906 /* AddFeedView.swift */; };
 		ABD5E432A578CC3616DB2B89 /* RSSBlueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */; };
+		AE1E3E2DEB6DCF456EE02AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D8BD925FE2EDB9FF077D3A /* Assets.xcassets */; };
 		B0CC269D0B45A38A0956D482 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */; };
 		B7914915FE9BF10A3D7F240C /* OPMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B219496D7600ABE330E3C7F /* OPMLService.swift */; };
 		BAC6C24706620030CEC0FCE3 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672CDD0843B3F247F3DFFE /* Feed.swift */; };
+		BB082AAB2DF0F51047C8D1DC /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912CBB60266A90A5145E032A /* FolderService.swift */; };
 		BE32F93C37E71D317DE10365 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6BF38F8FF35BCE556CBEAA /* SettingsView.swift */; };
 		C0C4E996F74EDA757A94D79B /* AddFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A83CCC409DBD7F929810906 /* AddFeedView.swift */; };
 		C6D8F2BC3B886593ACE4D608 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 682C13FD1AAA82A9EEA4A09B /* FeedKit */; };
@@ -45,8 +50,11 @@
 		D5BB10D0285A2484E82D1C5A /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7E520C700581BDE5FDF0E /* ModelTests.swift */; };
 		DB2752ED0C03098BFD5C92CF /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7757510BA1754269F5C3BA6A /* FeedKit */; };
 		DB5E773921E98AE7AE7F15F0 /* RSSBlueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */; };
+		E0493EE14F6D2C14693CAC17 /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912CBB60266A90A5145E032A /* FolderService.swift */; };
 		E6F50D18A9D781D9794426BC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECC897E3C72023B31CE163 /* TimelineView.swift */; };
 		EA2696E430D3599DD7F5DC9F /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080379AD3AAB030CDCF8F35B /* String+HTML.swift */; };
+		F08EDA6A3411AF55429A3B5A /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E9ACFE2EE584C25C9F69FD /* Folder.swift */; };
+		F784F26F55701CF9A43F1751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D8BD925FE2EDB9FF077D3A /* Assets.xcassets */; };
 		FE2C19E1A2F36C8B2BD565E1 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4EDD43443DBAB965BBA4C /* FeedService.swift */; };
 		FF681BE39A2889C3D8998F5A /* OPMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B219496D7600ABE330E3C7F /* OPMLService.swift */; };
 /* End PBXBuildFile section */
@@ -73,7 +81,9 @@
 		080379AD3AAB030CDCF8F35B /* String+HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+HTML.swift"; sourceTree = "<group>"; };
 		0B219496D7600ABE330E3C7F /* OPMLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPMLService.swift; sourceTree = "<group>"; };
 		1E672CDD0843B3F247F3DFFE /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		27E9ACFE2EE584C25C9F69FD /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		2AB4EDD43443DBAB965BBA4C /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		361B392B30952BA235F72DC0 /* FolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTests.swift; sourceTree = "<group>"; };
 		4A83CCC409DBD7F929810906 /* AddFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedView.swift; sourceTree = "<group>"; };
 		51EEF85A53506A1FFE05CF83 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		55068B9C30D8B127DAEB7CC6 /* FeedServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedServiceTests.swift; sourceTree = "<group>"; };
@@ -82,6 +92,8 @@
 		7BA7E520C700581BDE5FDF0E /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		7DFF1C8B92505732BB461526 /* RSSBlue-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "RSSBlue-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		912CBB60266A90A5145E032A /* FolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderService.swift; sourceTree = "<group>"; };
+		92D8BD925FE2EDB9FF077D3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A103EFA60F95790E03A81CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9A94909D31B2A16E8C0C43A2 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
 		9CECC897E3C72023B31CE163 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
@@ -146,6 +158,7 @@
 			children = (
 				F0792DB19E4A98B1736EFF14 /* FeedParserService.swift */,
 				2AB4EDD43443DBAB965BBA4C /* FeedService.swift */,
+				912CBB60266A90A5145E032A /* FolderService.swift */,
 				0B219496D7600ABE330E3C7F /* OPMLService.swift */,
 			);
 			path = Services;
@@ -199,6 +212,7 @@
 			children = (
 				623AD08C4D12FDBAC27044C0 /* FeedParserTests.swift */,
 				55068B9C30D8B127DAEB7CC6 /* FeedServiceTests.swift */,
+				361B392B30952BA235F72DC0 /* FolderTests.swift */,
 				7BA7E520C700581BDE5FDF0E /* ModelTests.swift */,
 				9A94909D31B2A16E8C0C43A2 /* NavigationTests.swift */,
 				04D15AEF20195602CCCE686C /* OPMLServiceTests.swift */,
@@ -219,6 +233,7 @@
 				51EEF85A53506A1FFE05CF83 /* Article.swift */,
 				1E672CDD0843B3F247F3DFFE /* Feed.swift */,
 				C53D58C86732DE74DECF52F6 /* FeedSelection.swift */,
+				27E9ACFE2EE584C25C9F69FD /* Folder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +266,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		AD998CFF38505AB40B6F0495 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				92D8BD925FE2EDB9FF077D3A /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		C652B1FEA23D009D78E01F85 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +296,7 @@
 			children = (
 				29CC9E3393D4B93D026C9CA7 /* iOS */,
 				C652B1FEA23D009D78E01F85 /* macOS */,
+				AD998CFF38505AB40B6F0495 /* Resources */,
 				52864FD9CE63BFC1CE39F1DE /* Shared */,
 				59AE525CDB49C814AF95CB0B /* Tests */,
 				0407BB62F4FD472A1791BFD3 /* Products */,
@@ -307,6 +331,7 @@
 			buildConfigurationList = 8B4818FD0E46EF04D7A4C7A1 /* Build configuration list for PBXNativeTarget "RSSBlue-iOS" */;
 			buildPhases = (
 				3DE52C34312D5C4BC0B4B45E /* Sources */,
+				6EE1FE26427F4778478522F3 /* Resources */,
 				CE0F18D40A8198F4DDB33804 /* Frameworks */,
 			);
 			buildRules = (
@@ -326,6 +351,7 @@
 			buildConfigurationList = 67827B68C705F1145A9F9BDA /* Build configuration list for PBXNativeTarget "RSSBlue" */;
 			buildPhases = (
 				5BC7BF715EFE117E97163E7E /* Sources */,
+				4923168260E2FBB273761BEC /* Resources */,
 				D69F9CE46B4AB1B928622346 /* Frameworks */,
 			);
 			buildRules = (
@@ -394,6 +420,25 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		4923168260E2FBB273761BEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE1E3E2DEB6DCF456EE02AA6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EE1FE26427F4778478522F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F784F26F55701CF9A43F1751 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1E33ED30500A7EF0C9770154 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -401,6 +446,7 @@
 			files = (
 				1EB4F6626A9D5D5DA4260103 /* FeedParserTests.swift in Sources */,
 				3424ABCA2D84853E4FE99429 /* FeedServiceTests.swift in Sources */,
+				940E40963A047EF22CE39CAC /* FolderTests.swift in Sources */,
 				D5BB10D0285A2484E82D1C5A /* ModelTests.swift in Sources */,
 				16737803583E74A3EAC31256 /* NavigationTests.swift in Sources */,
 				7277AD393154425D9DDE8EDF /* OPMLServiceTests.swift in Sources */,
@@ -419,6 +465,8 @@
 				11A4B65E0BF7BF2F820FECCB /* FeedParserService.swift in Sources */,
 				249911F6C2170AA518820F63 /* FeedSelection.swift in Sources */,
 				FE2C19E1A2F36C8B2BD565E1 /* FeedService.swift in Sources */,
+				7BD935EF1CF4044C7760BFB0 /* Folder.swift in Sources */,
+				E0493EE14F6D2C14693CAC17 /* FolderService.swift in Sources */,
 				FF681BE39A2889C3D8998F5A /* OPMLService.swift in Sources */,
 				ABD5E432A578CC3616DB2B89 /* RSSBlueApp.swift in Sources */,
 				BE32F93C37E71D317DE10365 /* SettingsView.swift in Sources */,
@@ -440,6 +488,8 @@
 				2433648B37DDC6EF864DBBD0 /* FeedParserService.swift in Sources */,
 				4933980B77899D52EDE1F32D /* FeedSelection.swift in Sources */,
 				D0E3670969C23E64B675715D /* FeedService.swift in Sources */,
+				F08EDA6A3411AF55429A3B5A /* Folder.swift in Sources */,
+				BB082AAB2DF0F51047C8D1DC /* FolderService.swift in Sources */,
 				B7914915FE9BF10A3D7F240C /* OPMLService.swift in Sources */,
 				DB5E773921E98AE7AE7F15F0 /* RSSBlueApp.swift in Sources */,
 				CF564B35E29A88F8E67848EA /* SettingsView.swift in Sources */,
@@ -455,6 +505,7 @@
 			files = (
 				5E3544ACD05145F754445D37 /* FeedParserTests.swift in Sources */,
 				370BD51CA019E8AC439B0180 /* FeedServiceTests.swift in Sources */,
+				7B57B5E5576B6CC273D44DB2 /* FolderTests.swift in Sources */,
 				39C15DE3DAE9B541FE84BD85 /* ModelTests.swift in Sources */,
 				0055A16DDA387398B0EE88F3 /* NavigationTests.swift in Sources */,
 				2C39C10FFF29431C297377ED /* OPMLServiceTests.swift in Sources */,
@@ -580,6 +631,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = Resources/RSSBlue.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -603,6 +655,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = Resources/RSSBlue.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
