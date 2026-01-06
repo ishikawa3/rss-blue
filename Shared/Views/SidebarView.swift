@@ -132,6 +132,8 @@ struct SmartFeedRow: View {
 
 struct FeedRow: View {
     let feed: Feed
+    @Environment(\.modelContext) private var modelContext
+    @State private var showDeleteConfirmation = false
 
     var body: some View {
         HStack {
@@ -156,28 +158,60 @@ struct FeedRow: View {
                     .clipShape(Capsule())
             }
         }
-    }
-}
-
-// Placeholder for Add Feed functionality (Issue #5)
-struct AddFeedView: View {
-    @Environment(\.dismiss) private var dismiss
-
-    var body: some View {
-        NavigationStack {
-            VStack {
-                Text("Add Feed")
-                    .font(.headline)
-                Text("Coming in Issue #5")
-                    .foregroundStyle(.secondary)
+        .contextMenu {
+            Button(action: { markAllAsRead() }) {
+                Label("Mark All as Read", systemImage: "checkmark.circle")
             }
-            .frame(minWidth: 300, minHeight: 200)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+
+            Divider()
+
+            Button(action: { copyFeedURL() }) {
+                Label("Copy Feed URL", systemImage: "doc.on.doc")
+            }
+
+            if let homeURL = feed.homePageURL {
+                Link(destination: homeURL) {
+                    Label("Open Website", systemImage: "safari")
                 }
             }
+
+            Divider()
+
+            Button(role: .destructive, action: { showDeleteConfirmation = true }) {
+                Label("Delete Feed", systemImage: "trash")
+            }
         }
+        .confirmationDialog(
+            "Delete \"\(feed.title)\"?",
+            isPresented: $showDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Delete", role: .destructive) {
+                deleteFeed()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will also delete all \(feed.articles?.count ?? 0) articles from this feed.")
+        }
+    }
+
+    private func markAllAsRead() {
+        for article in feed.articles ?? [] {
+            article.isRead = true
+        }
+    }
+
+    private func copyFeedURL() {
+        #if os(macOS)
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString(feed.url.absoluteString, forType: .string)
+        #else
+            UIPasteboard.general.string = feed.url.absoluteString
+        #endif
+    }
+
+    private func deleteFeed() {
+        modelContext.delete(feed)
     }
 }
 
