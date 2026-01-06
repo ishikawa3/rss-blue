@@ -122,7 +122,7 @@ final class FeedService: ObservableObject {
         let urlString = url.absoluteString
         let descriptor = FetchDescriptor<Feed>(
             predicate: #Predicate<Feed> { feed in
-                feed.url.absoluteString == urlString
+                feed.urlString == urlString
             }
         )
 

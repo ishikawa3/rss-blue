@@ -5,7 +5,7 @@ import SwiftData
 final class Feed {
     var id: UUID = UUID()
     var title: String = ""
-    var url: URL = URL(string: "https://example.com")!
+    var urlString: String = "https://example.com"
     var homePageURL: URL?
     var feedDescription: String?
     var iconData: Data?
@@ -17,6 +17,11 @@ final class Feed {
 
     var folder: Folder?
 
+    var url: URL {
+        get { URL(string: urlString) ?? URL(string: "https://example.com")! }
+        set { urlString = newValue.absoluteString }
+    }
+
     var unreadCount: Int {
         articles?.filter { !$0.isRead }.count ?? 0
     }
@@ -24,6 +29,6 @@ final class Feed {
     init(title: String, url: URL) {
         self.id = UUID()
         self.title = title
-        self.url = url
+        self.urlString = url.absoluteString
     }
 }
