@@ -191,9 +191,9 @@ struct ArticleRow: View {
             article.isRead = true
         }
         #if os(iOS)
-            .swipeActions(edge: .leading) {
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
                 Button {
-                    article.isRead.toggle()
+                    toggleReadWithHaptic()
                 } label: {
                     Label(
                         article.isRead ? "Unread" : "Read",
@@ -202,9 +202,9 @@ struct ArticleRow: View {
                 }
                 .tint(.blue)
             }
-            .swipeActions(edge: .trailing) {
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                 Button {
-                    article.isStarred.toggle()
+                    toggleStarWithHaptic()
                 } label: {
                     Label(
                         article.isStarred ? "Unstar" : "Star",
@@ -246,6 +246,20 @@ struct ArticleRow: View {
             }
         }
     }
+
+    #if os(iOS)
+        private func toggleReadWithHaptic() {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            article.isRead.toggle()
+        }
+
+        private func toggleStarWithHaptic() {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            article.isStarred.toggle()
+        }
+    #endif
 
     /// 検索クエリにマッチした部分をハイライト表示するテキストを生成
     @ViewBuilder

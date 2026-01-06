@@ -211,6 +211,14 @@ struct FolderRow: View {
             .dropDestination(for: String.self) { items, _ in
                 handleDrop(feedIds: items)
             }
+        #else
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                Button(role: .destructive) {
+                    showDeleteConfirmation = true
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
         #endif
         .contextMenu {
             Button(action: {
@@ -254,6 +262,10 @@ struct FolderRow: View {
     }
 
     private func deleteFolder() {
+        #if os(iOS)
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        #endif
         let folderService = FolderService(modelContext: modelContext)
         try? folderService.deleteFolder(folder)
     }
@@ -333,6 +345,22 @@ struct FeedRow: View {
         }
         #if os(macOS)
             .draggable(feed.id.uuidString)
+        #else
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                Button(role: .destructive) {
+                    showDeleteConfirmation = true
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button {
+                    markAllAsReadWithHaptic()
+                } label: {
+                    Label("Mark All Read", systemImage: "checkmark.circle")
+                }
+                .tint(.blue)
+            }
         #endif
         .contextMenu {
             Button(action: { markAllAsRead() }) {
@@ -417,8 +445,20 @@ struct FeedRow: View {
     }
 
     private func deleteFeed() {
+        #if os(iOS)
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.success)
+        #endif
         modelContext.delete(feed)
     }
+
+    #if os(iOS)
+        private func markAllAsReadWithHaptic() {
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+            markAllAsRead()
+        }
+    #endif
 }
 
 #Preview {
