@@ -186,6 +186,7 @@ struct ArticleRow: View {
             }
         }
         .padding(.vertical, 4)
+        .contentShape(Rectangle())
         #if os(iOS)
             .swipeActions(edge: .leading, allowsFullSwipe: true) {
                 Button {
