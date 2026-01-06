@@ -184,6 +184,10 @@ struct FolderRow: View {
             ForEach(folder.feeds ?? []) { feed in
                 FeedRow(feed: feed)
                     .tag(FeedSelection.feed(feed))
+                    .transition(.identity)
+            }
+            .transaction { transaction in
+                transaction.animation = nil
             }
         } label: {
             HStack {
