@@ -229,6 +229,85 @@ final class FeedService: ObservableObject {
 
         return newArticleCount
     }
+
+    // MARK: - OPML Import/Export
+
+    /// Result of an OPML import operation
+    struct OPMLImportResult {
+        let imported: Int
+        let skipped: Int
+        let failed: Int
+        let errors: [String]
+    }
+
+    /// Imports feeds from OPML data
+    /// - Parameters:
+    ///   - data: The OPML file data
+    ///   - skipDuplicates: Whether to skip duplicate feeds (default: true)
+    /// - Returns: The import result
+    func importOPML(data: Data, skipDuplicates: Bool = true) async throws -> OPMLImportResult {
+        isLoading = true
+        error = nil
+
+        defer { isLoading = false }
+
+        let opmlService = OPMLService()
+        let document = try opmlService.parse(data: data)
+        let feeds = document.allFeeds
+
+        if feeds.isEmpty {
+            throw OPMLError.noFeeds
+        }
+
+        var imported = 0
+        var skipped = 0
+        var failed = 0
+        var errors: [String] = []
+
+        for outline in feeds {
+            guard let feedURL = outline.feedURL else { continue }
+
+            do {
+                // Check for duplicates
+                if skipDuplicates {
+                    let exists = try await feedExists(url: feedURL)
+                    if exists {
+                        skipped += 1
+                        continue
+                    }
+                }
+
+                // Try to add the feed
+                _ = try await addFeed(from: feedURL.absoluteString)
+                imported += 1
+            } catch {
+                failed += 1
+                errors.append("\(outline.title): \(error.localizedDescription)")
+            }
+        }
+
+        return OPMLImportResult(
+            imported: imported, skipped: skipped, failed: failed, errors: errors)
+    }
+
+    /// Imports feeds from an OPML file URL
+    /// - Parameter url: The file URL
+    /// - Returns: The import result
+    func importOPML(fileURL: URL) async throws -> OPMLImportResult {
+        let data = try Data(contentsOf: fileURL)
+        return try await importOPML(data: data)
+    }
+
+    /// Exports all feeds to OPML data
+    /// - Parameter title: The title for the OPML document
+    /// - Returns: The OPML data
+    func exportOPML(title: String = "RSS Blue Subscriptions") throws -> Data {
+        let descriptor = FetchDescriptor<Feed>(sortBy: [SortDescriptor(\.title)])
+        let feeds = try modelContext.fetch(descriptor)
+
+        let opmlService = OPMLService()
+        return try opmlService.generate(feeds: feeds, title: title)
+    }
 }
 
 // MARK: - Errors

@@ -7,6 +7,7 @@ struct SidebarView: View {
     @Query private var allArticles: [Article]
     @Environment(\.modelContext) private var modelContext
     @State private var isAddingFeed = false
+    @State private var showSettings = false
 
     private var unreadCount: Int {
         allArticles.filter { !$0.isRead }.count
@@ -82,6 +83,11 @@ struct SidebarView: View {
         .navigationTitle("RSS Blue")
         .toolbar {
             #if os(iOS)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { showSettings = true }) {
+                        Label("Settings", systemImage: "gear")
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { isAddingFeed = true }) {
                         Label("Add Feed", systemImage: "plus")
@@ -92,6 +98,20 @@ struct SidebarView: View {
         .sheet(isPresented: $isAddingFeed) {
             AddFeedView()
         }
+        #if os(iOS)
+            .sheet(isPresented: $showSettings) {
+                NavigationStack {
+                    SettingsView()
+                    .navigationTitle("Settings")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") { showSettings = false }
+                        }
+                    }
+                }
+            }
+        #endif
     }
 
     private func deleteFeeds(at offsets: IndexSet) {
