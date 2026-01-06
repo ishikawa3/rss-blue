@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SidebarView: View {
     @Binding var selection: FeedSelection?
+    @Binding var showAddFeed: Bool
     @Query(sort: \Folder.sortOrder) private var folders: [Folder]
     @Query(
         filter: #Predicate<Feed> { $0.folder == nil },
@@ -10,10 +11,14 @@ struct SidebarView: View {
     ) private var uncategorizedFeeds: [Feed]
     @Query private var allArticles: [Article]
     @Environment(\.modelContext) private var modelContext
-    @State private var isAddingFeed = false
     @State private var isAddingFolder = false
     @State private var showSettings = false
     @State private var newFolderName = ""
+
+    init(selection: Binding<FeedSelection?>, showAddFeed: Binding<Bool> = .constant(false)) {
+        self._selection = selection
+        self._showAddFeed = showAddFeed
+    }
 
     private var unreadCount: Int {
         allArticles.filter { !$0.isRead }.count
@@ -77,7 +82,7 @@ struct SidebarView: View {
             .listStyle(.sidebar)
             .safeAreaInset(edge: .bottom) {
                 HStack {
-                    Button(action: { isAddingFeed = true }) {
+                    Button(action: { showAddFeed = true }) {
                         Label("Add Feed", systemImage: "plus")
                     }
                     .buttonStyle(.plain)
@@ -108,7 +113,7 @@ struct SidebarView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
-                        Button(action: { isAddingFeed = true }) {
+                        Button(action: { showAddFeed = true }) {
                             Label("Add Feed", systemImage: "plus")
                         }
                         Button(action: { isAddingFolder = true }) {
@@ -120,7 +125,7 @@ struct SidebarView: View {
                 }
             #endif
         }
-        .sheet(isPresented: $isAddingFeed) {
+        .sheet(isPresented: $showAddFeed) {
             AddFeedView()
         }
         .alert("New Folder", isPresented: $isAddingFolder) {

@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
@@ -9,11 +10,13 @@ struct ContentView: View {
     @State private var showRefreshError = false
     @State private var newArticleCount = 0
     @State private var showRefreshSuccess = false
+    @State private var showAddFeed = false
     @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Article.publishedDate, order: .reverse) private var allArticles: [Article]
 
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            SidebarView(selection: $selectedFeedSelection)
+            SidebarView(selection: $selectedFeedSelection, showAddFeed: $showAddFeed)
                 #if os(macOS)
                     .navigationSplitViewColumnWidth(min: 200, ideal: 250, max: 350)
                 #endif
@@ -43,10 +46,14 @@ struct ContentView: View {
                         }
                     }
                     .disabled(isRefreshing)
-                    .keyboardShortcut("r", modifiers: .command)
                     .help("Refresh all feeds (⌘R)")
                 }
             }
+            .focusedSceneValue(\.selectedArticle, $selectedArticle)
+            .focusedSceneValue(\.feedSelection, $selectedFeedSelection)
+            .focusedSceneValue(\.showAddFeed, $showAddFeed)
+            .focusedSceneValue(\.refreshAction, refreshFeeds)
+            .focusedSceneValue(\.markAllAsReadAction, markAllAsRead)
         #endif
         .alert("Refresh Error", isPresented: $showRefreshError) {
             Button("OK") { showRefreshError = false }
@@ -79,6 +86,37 @@ struct ContentView: View {
         }
 
         isRefreshing = false
+    }
+
+    private func markAllAsRead() {
+        let articlesToMark: [Article]
+
+        switch selectedFeedSelection {
+        case .allUnread:
+            articlesToMark = allArticles.filter { !$0.isRead }
+        case .today:
+            let today = Calendar.current.startOfDay(for: Date())
+            articlesToMark = allArticles.filter { article in
+                guard let date = article.publishedDate else { return false }
+                return date >= today && !article.isRead
+            }
+        case .starred:
+            articlesToMark = allArticles.filter { $0.isStarred && !$0.isRead }
+        case .feed(let feed):
+            articlesToMark = allArticles.filter { $0.feed == feed && !$0.isRead }
+        case .folder(let folder):
+            let folderFeeds = folder.feeds ?? []
+            articlesToMark = allArticles.filter { article in
+                guard let feedId = article.feed?.id else { return false }
+                return folderFeeds.contains { $0.id == feedId } && !article.isRead
+            }
+        case nil:
+            articlesToMark = []
+        }
+
+        for article in articlesToMark {
+            article.isRead = true
+        }
     }
 }
 

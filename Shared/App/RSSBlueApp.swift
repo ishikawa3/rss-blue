@@ -77,6 +77,16 @@ struct RSSBlueApp: App {
         .modelContainer(modelContainer)
         #if os(macOS)
             .commands {
+                // Article commands
+                ArticleCommands()
+
+                // Go commands
+                GoCommands()
+
+                // Subscription commands
+                SubscriptionCommands()
+
+                // Import/Export commands
                 CommandGroup(after: .importExport) {
                     Button("Import OPML...") {
                         showImportPicker = true

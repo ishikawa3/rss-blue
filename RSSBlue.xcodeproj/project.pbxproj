@@ -14,6 +14,7 @@
 		11A4B65E0BF7BF2F820FECCB /* FeedParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0792DB19E4A98B1736EFF14 /* FeedParserService.swift */; };
 		16737803583E74A3EAC31256 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A94909D31B2A16E8C0C43A2 /* NavigationTests.swift */; };
 		1C6027F71D6D730A591F4887 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672CDD0843B3F247F3DFFE /* Feed.swift */; };
+		1D45E7B87EFA631BDA4ECF2F /* FocusedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DD58038E73D3DF2D7C987 /* FocusedValues.swift */; };
 		1EB4F6626A9D5D5DA4260103 /* FeedParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD08C4D12FDBAC27044C0 /* FeedParserTests.swift */; };
 		20E8AE7E527EA84ACBF86860 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A103EFA60F95790E03A81CA /* ContentView.swift */; };
 		2433648B37DDC6EF864DBBD0 /* FeedParserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0792DB19E4A98B1736EFF14 /* FeedParserService.swift */; };
@@ -28,6 +29,7 @@
 		4297EE24897E914027BC2367 /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA84FE3523EA52C05711869 /* SearchServiceTests.swift */; };
 		4311FBFD299DD153FDCEFE1F /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */; };
 		4933980B77899D52EDE1F32D /* FeedSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D58C86732DE74DECF52F6 /* FeedSelection.swift */; };
+		4A5E9A9CC2B95C76212E64AD /* AppCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E9665EFCC50F599C7EECA7 /* AppCommands.swift */; };
 		55C832B3F1CD045D31C9784A /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */; };
 		5E32136B63E51D732E6AE905 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */; };
 		5E3544ACD05145F754445D37 /* FeedParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623AD08C4D12FDBAC27044C0 /* FeedParserTests.swift */; };
@@ -55,9 +57,11 @@
 		E0493EE14F6D2C14693CAC17 /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912CBB60266A90A5145E032A /* FolderService.swift */; };
 		E6F50D18A9D781D9794426BC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECC897E3C72023B31CE163 /* TimelineView.swift */; };
 		EA2696E430D3599DD7F5DC9F /* String+HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080379AD3AAB030CDCF8F35B /* String+HTML.swift */; };
+		EF2F3619CEDABCE1962B12DF /* AppCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E9665EFCC50F599C7EECA7 /* AppCommands.swift */; };
 		F06BD2D611D75CC9555F4D28 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FCBD39898E9F3D2E56D339 /* SearchService.swift */; };
 		F08EDA6A3411AF55429A3B5A /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E9ACFE2EE584C25C9F69FD /* Folder.swift */; };
 		F784F26F55701CF9A43F1751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D8BD925FE2EDB9FF077D3A /* Assets.xcassets */; };
+		F8D521ECE364D70B0D981435 /* FocusedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7DD58038E73D3DF2D7C987 /* FocusedValues.swift */; };
 		FB6DC2F242CD01B06AAB2F68 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FCBD39898E9F3D2E56D339 /* SearchService.swift */; };
 		FE2C19E1A2F36C8B2BD565E1 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4EDD43443DBAB965BBA4C /* FeedService.swift */; };
 		FF681BE39A2889C3D8998F5A /* OPMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B219496D7600ABE330E3C7F /* OPMLService.swift */; };
@@ -94,6 +98,7 @@
 		55068B9C30D8B127DAEB7CC6 /* FeedServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedServiceTests.swift; sourceTree = "<group>"; };
 		623AD08C4D12FDBAC27044C0 /* FeedParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParserTests.swift; sourceTree = "<group>"; };
 		71C523292FAABE8B2E96FB89 /* RSSBlueTests-iOS.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "RSSBlueTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74E9665EFCC50F599C7EECA7 /* AppCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCommands.swift; sourceTree = "<group>"; };
 		7BA7E520C700581BDE5FDF0E /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		7DFF1C8B92505732BB461526 /* RSSBlue-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "RSSBlue-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
@@ -107,6 +112,7 @@
 		C53D58C86732DE74DECF52F6 /* FeedSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelection.swift; sourceTree = "<group>"; };
 		CC848818AF86005E245AD552 /* RSSBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSSBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSBlueApp.swift; sourceTree = "<group>"; };
+		CF7DD58038E73D3DF2D7C987 /* FocusedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedValues.swift; sourceTree = "<group>"; };
 		E3FCBD39898E9F3D2E56D339 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		F0792DB19E4A98B1736EFF14 /* FeedParserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParserService.swift; sourceTree = "<group>"; };
 		F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
@@ -302,6 +308,8 @@
 		D4531E36E783D07481B1C990 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				74E9665EFCC50F599C7EECA7 /* AppCommands.swift */,
+				CF7DD58038E73D3DF2D7C987 /* FocusedValues.swift */,
 				CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */,
 			);
 			path = App;
@@ -475,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0C4E996F74EDA757A94D79B /* AddFeedView.swift in Sources */,
+				4A5E9A9CC2B95C76212E64AD /* AppCommands.swift in Sources */,
 				34EAD8E55B4F57E0089D6972 /* Article.swift in Sources */,
 				B0CC269D0B45A38A0956D482 /* ArticleDetailView.swift in Sources */,
 				0B5FB60DB57265F7BF7DF330 /* ContentView.swift in Sources */,
@@ -482,6 +491,7 @@
 				11A4B65E0BF7BF2F820FECCB /* FeedParserService.swift in Sources */,
 				249911F6C2170AA518820F63 /* FeedSelection.swift in Sources */,
 				FE2C19E1A2F36C8B2BD565E1 /* FeedService.swift in Sources */,
+				F8D521ECE364D70B0D981435 /* FocusedValues.swift in Sources */,
 				7BD935EF1CF4044C7760BFB0 /* Folder.swift in Sources */,
 				E0493EE14F6D2C14693CAC17 /* FolderService.swift in Sources */,
 				FF681BE39A2889C3D8998F5A /* OPMLService.swift in Sources */,
@@ -499,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6046D3C0B867D1498E539CC /* AddFeedView.swift in Sources */,
+				EF2F3619CEDABCE1962B12DF /* AppCommands.swift in Sources */,
 				3A88DCCBB8160687CD353233 /* Article.swift in Sources */,
 				55C832B3F1CD045D31C9784A /* ArticleDetailView.swift in Sources */,
 				20E8AE7E527EA84ACBF86860 /* ContentView.swift in Sources */,
@@ -506,6 +517,7 @@
 				2433648B37DDC6EF864DBBD0 /* FeedParserService.swift in Sources */,
 				4933980B77899D52EDE1F32D /* FeedSelection.swift in Sources */,
 				D0E3670969C23E64B675715D /* FeedService.swift in Sources */,
+				1D45E7B87EFA631BDA4ECF2F /* FocusedValues.swift in Sources */,
 				F08EDA6A3411AF55429A3B5A /* Folder.swift in Sources */,
 				BB082AAB2DF0F51047C8D1DC /* FolderService.swift in Sources */,
 				B7914915FE9BF10A3D7F240C /* OPMLService.swift in Sources */,
