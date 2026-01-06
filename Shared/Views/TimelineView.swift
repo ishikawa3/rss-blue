@@ -164,6 +164,61 @@ struct ArticleRow: View {
         .onTapGesture {
             article.isRead = true
         }
+        #if os(iOS)
+            .swipeActions(edge: .leading) {
+                Button {
+                    article.isRead.toggle()
+                } label: {
+                    Label(
+                        article.isRead ? "Unread" : "Read",
+                        systemImage: article.isRead ? "circle" : "checkmark.circle"
+                    )
+                }
+                .tint(.blue)
+            }
+            .swipeActions(edge: .trailing) {
+                Button {
+                    article.isStarred.toggle()
+                } label: {
+                    Label(
+                        article.isStarred ? "Unstar" : "Star",
+                        systemImage: article.isStarred ? "star.slash" : "star.fill"
+                    )
+                }
+                .tint(.yellow)
+            }
+        #endif
+        .contextMenu {
+            Button {
+                article.isRead.toggle()
+            } label: {
+                Label(
+                    article.isRead ? "Mark as Unread" : "Mark as Read",
+                    systemImage: article.isRead ? "circle" : "checkmark.circle"
+                )
+            }
+
+            Button {
+                article.isStarred.toggle()
+            } label: {
+                Label(
+                    article.isStarred ? "Remove Star" : "Add Star",
+                    systemImage: article.isStarred ? "star.slash" : "star.fill"
+                )
+            }
+
+            Divider()
+
+            if let url = article.url {
+                Link(destination: url) {
+                    Label("Open in Browser", systemImage: "safari")
+                }
+
+                ShareLink(item: url) {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+            }
+        }
     }
 }
 
