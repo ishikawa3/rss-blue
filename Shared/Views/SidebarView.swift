@@ -180,17 +180,14 @@ struct FolderRow: View {
     @State private var showDeleteConfirmation = false
 
     var body: some View {
-        DisclosureGroup(isExpanded: $folder.isExpanded) {
-            ForEach(folder.feeds ?? []) { feed in
-                FeedRow(feed: feed)
-                    .tag(FeedSelection.feed(feed))
-                    .transition(.identity)
-            }
-            .transaction { transaction in
-                transaction.animation = nil
-            }
-        } label: {
+        Group {
+            // Folder header row
             HStack {
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .rotationEffect(.degrees(folder.isExpanded ? 90 : 0))
+
                 Image(systemName: folder.isExpanded ? "folder.fill" : "folder")
                     .foregroundStyle(.brown)
 
@@ -209,6 +206,10 @@ struct FolderRow: View {
                         .clipShape(Capsule())
                 }
             }
+            .contentShape(Rectangle())
+            .onTapGesture {
+                folder.isExpanded.toggle()
+            }
             .tag(FeedSelection.folder(folder))
             .contextMenu {
                 Button(action: {
@@ -224,9 +225,15 @@ struct FolderRow: View {
                     Label("Delete Folder", systemImage: "trash")
                 }
             }
-        }
-        .transaction { transaction in
-            transaction.animation = nil
+
+            // Feeds inside folder (shown when expanded)
+            if folder.isExpanded {
+                ForEach(folder.feeds ?? []) { feed in
+                    FeedRow(feed: feed)
+                        .tag(FeedSelection.feed(feed))
+                        .padding(.leading, 20)
+                }
+            }
         }
         #if os(macOS)
             .dropDestination(for: String.self) { items, _ in
