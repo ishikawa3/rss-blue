@@ -49,6 +49,11 @@ struct TimelineView: View {
             ForEach(articles) { article in
                 ArticleRow(article: article, searchQuery: searchText)
                     .tag(article as Article?)
+                    #if os(macOS)
+                        .onTapGesture {
+                            selectedArticle = article
+                        }
+                    #endif
             }
         }
         .listStyle(.plain)
