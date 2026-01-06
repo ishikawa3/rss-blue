@@ -3,21 +3,21 @@ import SwiftData
 
 @Model
 final class Feed {
-    var id: UUID
-    var title: String
-    var url: URL
+    var id: UUID = UUID()
+    var title: String = ""
+    var url: URL = URL(string: "https://example.com")!
     var homePageURL: URL?
     var feedDescription: String?
     var iconData: Data?
     var lastUpdated: Date?
-    
+
     @Relationship(deleteRule: .cascade, inverse: \Article.feed)
     var articles: [Article]?
-    
+
     var unreadCount: Int {
         articles?.filter { !$0.isRead }.count ?? 0
     }
-    
+
     init(title: String, url: URL) {
         self.id = UUID()
         self.title = title
