@@ -207,6 +207,7 @@ struct FolderRow: View {
             }
             .tag(FeedSelection.folder(folder))
         }
+        .animation(nil, value: folder.isExpanded)
         #if os(macOS)
             .dropDestination(for: String.self) { items, _ in
                 handleDrop(feedIds: items)
@@ -368,6 +369,13 @@ struct FeedRow: View {
             }
 
             Divider()
+
+            // Remove from folder (only shown when feed is in a folder)
+            if feed.folder != nil {
+                Button(action: { moveFeed(to: nil) }) {
+                    Label("Remove from Folder", systemImage: "folder.badge.minus")
+                }
+            }
 
             // Move to folder menu
             Menu {
