@@ -221,7 +221,9 @@ struct FolderRow: View {
                 }
             }
         }
-        .animation(nil, value: folder.isExpanded)
+        .transaction { transaction in
+            transaction.animation = nil
+        }
         #if os(macOS)
             .dropDestination(for: String.self) { items, _ in
                 handleDrop(feedIds: items)
