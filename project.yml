@@ -1,0 +1,99 @@
+name: RSSBlue
+options:
+  bundleIdPrefix: com.ishikawa
+  deploymentTarget:
+    macOS: "14.0"
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
+
+settings:
+  SWIFT_VERSION: "5.9"
+  MARKETING_VERSION: "1.0.0"
+  CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  RSSBlue:
+    type: application
+    platform: macOS
+    sources:
+      - path: Shared
+        excludes:
+          - "**/*Tests*"
+      - path: macOS
+    entitlements:
+      path: Resources/RSSBlue.entitlements
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.ishikawa.rssblue
+      PRODUCT_NAME: RSS Blue
+      INFOPLIST_GENERATION_MODE: GeneratedFile
+      INFOPLIST_KEY_CFBundleDisplayName: RSS Blue
+      INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.news
+      INFOPLIST_KEY_NSHumanReadableCopyright: "Copyright © 2026 ishikawa. All rights reserved."
+      CODE_SIGN_ENTITLEMENTS: Resources/RSSBlue.entitlements
+      ENABLE_HARDENED_RUNTIME: YES
+    info:
+      path: Resources/Info-macOS.plist
+      properties:
+        CFBundleDisplayName: RSS Blue
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+    scheme:
+      testTargets:
+        - RSSBlueTests
+
+  RSSBlue-iOS:
+    type: application
+    platform: iOS
+    sources:
+      - path: Shared
+        excludes:
+          - "**/*Tests*"
+      - path: iOS
+    entitlements:
+      path: Resources/RSSBlue-iOS.entitlements
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.ishikawa.rssblue
+      PRODUCT_NAME: RSS Blue
+      INFOPLIST_GENERATION_MODE: GeneratedFile
+      INFOPLIST_KEY_CFBundleDisplayName: RSS Blue
+      INFOPLIST_KEY_UILaunchScreen_Generation: YES
+      INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+      INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+      CODE_SIGN_ENTITLEMENTS: Resources/RSSBlue-iOS.entitlements
+      TARGETED_DEVICE_FAMILY: "1,2"
+    info:
+      path: Resources/Info-iOS.plist
+      properties:
+        CFBundleDisplayName: RSS Blue
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen: {}
+    scheme:
+      testTargets:
+        - RSSBlueTests-iOS
+
+  RSSBlueTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+        excludes:
+          - "**/iOS/**"
+    dependencies:
+      - target: RSSBlue
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.ishikawa.rssblue.tests
+
+  RSSBlueTests-iOS:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: Tests
+        excludes:
+          - "**/macOS/**"
+    dependencies:
+      - target: RSSBlue-iOS
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.ishikawa.rssblue.tests

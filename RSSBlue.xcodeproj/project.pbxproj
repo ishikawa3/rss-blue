@@ -1,0 +1,698 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B5FB60DB57265F7BF7DF330 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A103EFA60F95790E03A81CA /* ContentView.swift */; };
+		1C6027F71D6D730A591F4887 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672CDD0843B3F247F3DFFE /* Feed.swift */; };
+		20E8AE7E527EA84ACBF86860 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A103EFA60F95790E03A81CA /* ContentView.swift */; };
+		2F7BF22E70AE3DC5603139E0 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECC897E3C72023B31CE163 /* TimelineView.swift */; };
+		34EAD8E55B4F57E0089D6972 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEF85A53506A1FFE05CF83 /* Article.swift */; };
+		39C15DE3DAE9B541FE84BD85 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7E520C700581BDE5FDF0E /* ModelTests.swift */; };
+		3A88DCCBB8160687CD353233 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEF85A53506A1FFE05CF83 /* Article.swift */; };
+		4311FBFD299DD153FDCEFE1F /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */; };
+		55C832B3F1CD045D31C9784A /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */; };
+		5E32136B63E51D732E6AE905 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */; };
+		ABD5E432A578CC3616DB2B89 /* RSSBlueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */; };
+		B0CC269D0B45A38A0956D482 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */; };
+		BAC6C24706620030CEC0FCE3 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672CDD0843B3F247F3DFFE /* Feed.swift */; };
+		BE32F93C37E71D317DE10365 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6BF38F8FF35BCE556CBEAA /* SettingsView.swift */; };
+		CF564B35E29A88F8E67848EA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6BF38F8FF35BCE556CBEAA /* SettingsView.swift */; };
+		D5BB10D0285A2484E82D1C5A /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7E520C700581BDE5FDF0E /* ModelTests.swift */; };
+		DB5E773921E98AE7AE7F15F0 /* RSSBlueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */; };
+		E6F50D18A9D781D9794426BC /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECC897E3C72023B31CE163 /* TimelineView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2D26578871F944E965F9050C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABF2D9D60A0BB4D89F1C323 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 61E2306E432CB2800B18DB3D;
+			remoteInfo = "RSSBlue-iOS";
+		};
+		6A656222416300B4C230D5C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ABF2D9D60A0BB4D89F1C323 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C54696EAC6DF4189E1FA7348;
+			remoteInfo = RSSBlue;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1E672CDD0843B3F247F3DFFE /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		51EEF85A53506A1FFE05CF83 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		71C523292FAABE8B2E96FB89 /* RSSBlueTests-iOS.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = "RSSBlueTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BA7E520C700581BDE5FDF0E /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		7DFF1C8B92505732BB461526 /* RSSBlue-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "RSSBlue-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		9A103EFA60F95790E03A81CA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9CECC897E3C72023B31CE163 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
+		9E6BF38F8FF35BCE556CBEAA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B509D4F94004D41ADE54DC8F /* RSSBlue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSBlue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC848818AF86005E245AD552 /* RSSBlueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RSSBlueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSBlueApp.swift; sourceTree = "<group>"; };
+		F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0407BB62F4FD472A1791BFD3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7DFF1C8B92505732BB461526 /* RSSBlue-iOS.app */,
+				B509D4F94004D41ADE54DC8F /* RSSBlue.app */,
+				71C523292FAABE8B2E96FB89 /* RSSBlueTests-iOS.xctest */,
+				CC848818AF86005E245AD552 /* RSSBlueTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0D47D9D200CF9F53A962C985 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		15C36E565777FA2B43CAEE10 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		29CC9E3393D4B93D026C9CA7 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				900E397261DEB374334965C2 /* App */,
+				53A5D5C853DA2B042A9668AB /* Views */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		35ABABBFC4C5280A36B2BCA3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		52864FD9CE63BFC1CE39F1DE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				D4531E36E783D07481B1C990 /* App */,
+				71191239D5A3DD1A14EAEA71 /* Models */,
+				0D47D9D200CF9F53A962C985 /* Services */,
+				7C41F43A1F99950AEA09FEB9 /* Utilities */,
+				35ABABBFC4C5280A36B2BCA3 /* ViewModels */,
+				742995FAAA6C3DCA76EE7D90 /* Views */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		53A5D5C853DA2B042A9668AB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		59AE525CDB49C814AF95CB0B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7BA7E520C700581BDE5FDF0E /* ModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		71164F9E77E728D1E9C390C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		71191239D5A3DD1A14EAEA71 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				51EEF85A53506A1FFE05CF83 /* Article.swift */,
+				1E672CDD0843B3F247F3DFFE /* Feed.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		742995FAAA6C3DCA76EE7D90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */,
+				9A103EFA60F95790E03A81CA /* ContentView.swift */,
+				9E6BF38F8FF35BCE556CBEAA /* SettingsView.swift */,
+				90D1878E13E3DDA3F0CC2C6E /* SidebarView.swift */,
+				9CECC897E3C72023B31CE163 /* TimelineView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C41F43A1F99950AEA09FEB9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		900E397261DEB374334965C2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C652B1FEA23D009D78E01F85 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				15C36E565777FA2B43CAEE10 /* App */,
+				71164F9E77E728D1E9C390C1 /* Views */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		D4531E36E783D07481B1C990 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DCB7738AEB4DAC8357AFAF45 = {
+			isa = PBXGroup;
+			children = (
+				29CC9E3393D4B93D026C9CA7 /* iOS */,
+				C652B1FEA23D009D78E01F85 /* macOS */,
+				52864FD9CE63BFC1CE39F1DE /* Shared */,
+				59AE525CDB49C814AF95CB0B /* Tests */,
+				0407BB62F4FD472A1791BFD3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		275EC50BFE736505A993EE41 /* RSSBlueTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5D38580B1D9EFDC5F41D6B7 /* Build configuration list for PBXNativeTarget "RSSBlueTests" */;
+			buildPhases = (
+				1E33ED30500A7EF0C9770154 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2193B03695CAE705C80028BF /* PBXTargetDependency */,
+			);
+			name = RSSBlueTests;
+			packageProductDependencies = (
+			);
+			productName = RSSBlueTests;
+			productReference = CC848818AF86005E245AD552 /* RSSBlueTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		61E2306E432CB2800B18DB3D /* RSSBlue-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B4818FD0E46EF04D7A4C7A1 /* Build configuration list for PBXNativeTarget "RSSBlue-iOS" */;
+			buildPhases = (
+				3DE52C34312D5C4BC0B4B45E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RSSBlue-iOS";
+			packageProductDependencies = (
+			);
+			productName = "RSSBlue-iOS";
+			productReference = 7DFF1C8B92505732BB461526 /* RSSBlue-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C54696EAC6DF4189E1FA7348 /* RSSBlue */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67827B68C705F1145A9F9BDA /* Build configuration list for PBXNativeTarget "RSSBlue" */;
+			buildPhases = (
+				5BC7BF715EFE117E97163E7E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RSSBlue;
+			packageProductDependencies = (
+			);
+			productName = RSSBlue;
+			productReference = B509D4F94004D41ADE54DC8F /* RSSBlue.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E0B4C3D16123597ACF64A768 /* RSSBlueTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEF6BC206EEDEF04723FD4FE /* Build configuration list for PBXNativeTarget "RSSBlueTests-iOS" */;
+			buildPhases = (
+				B7CC908809504A9CA673CE90 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3ECA575DF92CD47A24D82E15 /* PBXTargetDependency */,
+			);
+			name = "RSSBlueTests-iOS";
+			packageProductDependencies = (
+			);
+			productName = "RSSBlueTests-iOS";
+			productReference = 71C523292FAABE8B2E96FB89 /* RSSBlueTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2ABF2D9D60A0BB4D89F1C323 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = 466D7B025AA1F28576A0C586 /* Build configuration list for PBXProject "RSSBlue" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = DCB7738AEB4DAC8357AFAF45;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C54696EAC6DF4189E1FA7348 /* RSSBlue */,
+				61E2306E432CB2800B18DB3D /* RSSBlue-iOS */,
+				275EC50BFE736505A993EE41 /* RSSBlueTests */,
+				E0B4C3D16123597ACF64A768 /* RSSBlueTests-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E33ED30500A7EF0C9770154 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5BB10D0285A2484E82D1C5A /* ModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DE52C34312D5C4BC0B4B45E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34EAD8E55B4F57E0089D6972 /* Article.swift in Sources */,
+				B0CC269D0B45A38A0956D482 /* ArticleDetailView.swift in Sources */,
+				0B5FB60DB57265F7BF7DF330 /* ContentView.swift in Sources */,
+				BAC6C24706620030CEC0FCE3 /* Feed.swift in Sources */,
+				ABD5E432A578CC3616DB2B89 /* RSSBlueApp.swift in Sources */,
+				BE32F93C37E71D317DE10365 /* SettingsView.swift in Sources */,
+				4311FBFD299DD153FDCEFE1F /* SidebarView.swift in Sources */,
+				2F7BF22E70AE3DC5603139E0 /* TimelineView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5BC7BF715EFE117E97163E7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A88DCCBB8160687CD353233 /* Article.swift in Sources */,
+				55C832B3F1CD045D31C9784A /* ArticleDetailView.swift in Sources */,
+				20E8AE7E527EA84ACBF86860 /* ContentView.swift in Sources */,
+				1C6027F71D6D730A591F4887 /* Feed.swift in Sources */,
+				DB5E773921E98AE7AE7F15F0 /* RSSBlueApp.swift in Sources */,
+				CF564B35E29A88F8E67848EA /* SettingsView.swift in Sources */,
+				5E32136B63E51D732E6AE905 /* SidebarView.swift in Sources */,
+				E6F50D18A9D781D9794426BC /* TimelineView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B7CC908809504A9CA673CE90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39C15DE3DAE9B541FE84BD85 /* ModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2193B03695CAE705C80028BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C54696EAC6DF4189E1FA7348 /* RSSBlue */;
+			targetProxy = 6A656222416300B4C230D5C1 /* PBXContainerItemProxy */;
+		};
+		3ECA575DF92CD47A24D82E15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 61E2306E432CB2800B18DB3D /* RSSBlue-iOS */;
+			targetProxy = 2D26578871F944E965F9050C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		409030350571B85333DDB2AC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		40B96D4F22D828552F2831F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSSBlue-iOS.app/RSSBlue-iOS";
+			};
+			name = Release;
+		};
+		41F2ADF492876DE827CDFB3C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSSBlue-iOS.app/RSSBlue-iOS";
+			};
+			name = Debug;
+		};
+		728B5DDF44D10B12EC399D57 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/RSSBlue.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Resources/Info-macOS.plist";
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				INFOPLIST_KEY_CFBundleDisplayName = "RSS Blue";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 ishikawa. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue;
+				PRODUCT_NAME = "RSS Blue";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		829A9449252C99D9629988D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/RSSBlue.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "Resources/Info-macOS.plist";
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				INFOPLIST_KEY_CFBundleDisplayName = "RSS Blue";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 ishikawa. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue;
+				PRODUCT_NAME = "RSS Blue";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8E948B2F980A60B53225A031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Resources/RSSBlue-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Resources/Info-iOS.plist";
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				INFOPLIST_KEY_CFBundleDisplayName = "RSS Blue";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue;
+				PRODUCT_NAME = "RSS Blue";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B122AB931D9EC5E1C9A5D566 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Resources/RSSBlue-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Resources/Info-iOS.plist";
+				INFOPLIST_GENERATION_MODE = GeneratedFile;
+				INFOPLIST_KEY_CFBundleDisplayName = "RSS Blue";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue;
+				PRODUCT_NAME = "RSS Blue";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D3E96F51F90F12FA237F640B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSSBlue.app/Contents/MacOS/RSSBlue";
+			};
+			name = Release;
+		};
+		D610C5D6CEE0EA60E48079E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		DA5B57B1BF5E08150A10CED4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ishikawa.rssblue.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSSBlue.app/Contents/MacOS/RSSBlue";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		466D7B025AA1F28576A0C586 /* Build configuration list for PBXProject "RSSBlue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				409030350571B85333DDB2AC /* Debug */,
+				D610C5D6CEE0EA60E48079E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		67827B68C705F1145A9F9BDA /* Build configuration list for PBXNativeTarget "RSSBlue" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				829A9449252C99D9629988D7 /* Debug */,
+				728B5DDF44D10B12EC399D57 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8B4818FD0E46EF04D7A4C7A1 /* Build configuration list for PBXNativeTarget "RSSBlue-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B122AB931D9EC5E1C9A5D566 /* Debug */,
+				8E948B2F980A60B53225A031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B5D38580B1D9EFDC5F41D6B7 /* Build configuration list for PBXNativeTarget "RSSBlueTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DA5B57B1BF5E08150A10CED4 /* Debug */,
+				D3E96F51F90F12FA237F640B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FEF6BC206EEDEF04723FD4FE /* Build configuration list for PBXNativeTarget "RSSBlueTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41F2ADF492876DE827CDFB3C /* Debug */,
+				40B96D4F22D828552F2831F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2ABF2D9D60A0BB4D89F1C323 /* Project object */;
+}
