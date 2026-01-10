@@ -67,7 +67,7 @@ struct RSSBlueApp: App {
     }
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup(id: "main") {
             ContentView()
                 .fileImporter(
                     isPresented: $showImportPicker,
@@ -139,6 +139,15 @@ struct RSSBlueApp: App {
             Settings {
                 SettingsView()
             }
+
+            MenuBarExtra {
+                MenuBarView()
+                    .modelContainer(modelContainer)
+            } label: {
+                MenuBarLabel()
+                    .modelContainer(modelContainer)
+            }
+            .menuBarExtraStyle(.window)
         #endif
     }
 
