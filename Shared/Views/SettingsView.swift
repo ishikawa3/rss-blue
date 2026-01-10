@@ -3,6 +3,7 @@ import UniformTypeIdentifiers
 
 struct SettingsView: View {
     @AppStorage("refreshInterval") private var refreshInterval: Int = 30
+    @AppStorage("refreshOnWiFiOnly") private var refreshOnWiFiOnly: Bool = false
     @AppStorage("showUnreadOnly") private var showUnreadOnly: Bool = false
     @Environment(\.modelContext) private var modelContext
 
@@ -24,6 +25,11 @@ struct SettingsView: View {
                     Text("1 hour").tag(60)
                     Text("Manual only").tag(0)
                 }
+
+                #if os(iOS)
+                    Toggle("Refresh on Wi-Fi Only", isOn: $refreshOnWiFiOnly)
+                        .disabled(refreshInterval == 0)
+                #endif
 
                 Toggle("Show Unread Only", isOn: $showUnreadOnly)
             }

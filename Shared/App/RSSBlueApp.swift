@@ -2,6 +2,10 @@ import SwiftData
 import SwiftUI
 import UniformTypeIdentifiers
 
+#if os(iOS)
+    import BackgroundTasks
+#endif
+
 @main
 struct RSSBlueApp: App {
     let modelContainer: ModelContainer
@@ -12,6 +16,7 @@ struct RSSBlueApp: App {
     @State private var showImportResult = false
     @State private var importError: String?
     @State private var showImportError = false
+    @Environment(\.scenePhase) private var scenePhase
 
     init() {
         do {
@@ -35,6 +40,14 @@ struct RSSBlueApp: App {
                 for: Feed.self, Article.self, Folder.self,
                 configurations: config
             )
+
+            // Set up background refresh service
+            BackgroundRefreshService.shared.modelContainer = modelContainer
+
+            #if os(iOS)
+                // Register background task for iOS
+                BackgroundRefreshService.shared.registerBackgroundTask()
+            #endif
         } catch {
             fatalError("Failed to initialize ModelContainer: \(error)")
         }
@@ -72,6 +85,9 @@ struct RSSBlueApp: App {
                     Button("OK") { showImportError = false }
                 } message: {
                     Text(importError ?? "Failed to import OPML")
+                }
+                .onChange(of: scenePhase) { oldPhase, newPhase in
+                    handleScenePhaseChange(from: oldPhase, to: newPhase)
                 }
         }
         .modelContainer(modelContainer)
@@ -149,6 +165,29 @@ struct RSSBlueApp: App {
         } catch {
             importError = error.localizedDescription
             showImportError = true
+        }
+    }
+
+    @MainActor
+    private func handleScenePhaseChange(from oldPhase: ScenePhase, to newPhase: ScenePhase) {
+        switch newPhase {
+        case .active:
+            #if os(macOS)
+                // Start periodic refresh on macOS when app becomes active
+                BackgroundRefreshService.shared.startPeriodicRefresh()
+            #endif
+
+        case .background:
+            #if os(iOS)
+                // Schedule background refresh when going to background on iOS
+                BackgroundRefreshService.shared.scheduleBackgroundRefresh()
+            #endif
+
+        case .inactive:
+            break
+
+        @unknown default:
+            break
         }
     }
 }

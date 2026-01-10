@@ -82,6 +82,10 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
+        BGTaskSchedulerPermittedIdentifiers:
+          - com.ishikawa.rssblue.refresh
+        UIBackgroundModes:
+          - fetch
     dependencies:
       - package: FeedKit
     scheme:
