@@ -86,8 +86,14 @@ targets:
           - com.ishikawa.rssblue.refresh
         UIBackgroundModes:
           - fetch
+        CFBundleURLTypes:
+          - CFBundleURLName: com.ishikawa.rssblue
+            CFBundleURLSchemes:
+              - rssblue
     dependencies:
       - package: FeedKit
+      - target: RSSBlueWidget
+        embed: true
     scheme:
       testTargets:
         - RSSBlueTests-iOS
@@ -123,3 +129,28 @@ targets:
       GENERATE_INFOPLIST_FILE: YES
       TEST_HOST: "$(BUILT_PRODUCTS_DIR)/RSS Blue.app/RSS Blue"
       BUNDLE_LOADER: "$(TEST_HOST)"
+
+  RSSBlueWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Widget
+      - path: Shared/Services/WidgetDataManager.swift
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.ishikawa.rssblue.widget
+      PRODUCT_NAME: RSSBlueWidget
+      INFOPLIST_GENERATION_MODE: GeneratedFile
+      INFOPLIST_KEY_CFBundleDisplayName: RSS Blue Widget
+      INFOPLIST_KEY_NSExtension: extension
+      CODE_SIGN_ENTITLEMENTS: Resources/RSSBlueWidget.entitlements
+      TARGETED_DEVICE_FAMILY: "1,2"
+      SKIP_INSTALL: YES
+      LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks"
+    info:
+      path: Resources/Info-Widget.plist
+      properties:
+        CFBundleDisplayName: RSS Blue Widget
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension

@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import WidgetKit
 
 /// Service for managing feed operations
 @MainActor
@@ -175,7 +176,42 @@ final class FeedService: ObservableObject {
             throw err
         }
 
+        // Update widget data
+        updateWidgetData()
+
         return totalNewArticles
+    }
+
+    /// Updates widget data with current unread articles
+    private func updateWidgetData() {
+        let descriptor = FetchDescriptor<Article>(
+            predicate: #Predicate<Article> { !$0.isRead },
+            sortBy: [SortDescriptor(\.publishedDate, order: .reverse)]
+        )
+
+        do {
+            let unreadArticles = try modelContext.fetch(descriptor)
+            let recentArticles = unreadArticles.prefix(20).map { article in
+                WidgetArticle(
+                    id: article.id.uuidString,
+                    title: article.title,
+                    feedTitle: article.feed?.title ?? "Unknown",
+                    publishedDate: article.publishedDate,
+                    isRead: article.isRead
+                )
+            }
+
+            let widgetData = WidgetData(
+                unreadCount: unreadArticles.count,
+                recentArticles: Array(recentArticles),
+                lastUpdated: Date()
+            )
+
+            WidgetDataManager.shared.saveWidgetData(widgetData)
+            WidgetCenter.shared.reloadAllTimelines()
+        } catch {
+            print("[FeedService] Failed to update widget data: \(error)")
+        }
     }
 
     /// Refreshes a single feed and returns the count of new articles

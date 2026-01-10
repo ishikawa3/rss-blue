@@ -102,6 +102,9 @@ struct RSSBlueApp: App {
                 .onChange(of: scenePhase) { oldPhase, newPhase in
                     handleScenePhaseChange(from: oldPhase, to: newPhase)
                 }
+                .onOpenURL { url in
+                    handleDeepLink(url: url)
+                }
                 .task {
                     // Request notification permission on first launch
                     await requestNotificationPermissionIfNeeded()
@@ -224,6 +227,28 @@ struct RSSBlueApp: App {
 
         if status == .notDetermined {
             _ = await NotificationService.shared.requestAuthorization()
+        }
+    }
+
+    /// Handle deep links from widgets and other sources
+    /// URL format: rssblue://article/{articleId} or rssblue://unread
+    @MainActor
+    private func handleDeepLink(url: URL) {
+        guard url.scheme == "rssblue" else { return }
+
+        switch url.host {
+        case "article":
+            // Extract article ID from path
+            let articleId = url.pathComponents.dropFirst().first
+            if let articleId = articleId {
+                pendingArticleId = articleId
+            }
+        case "unread":
+            // Just open the app to the unread view
+            // The default view is already unread articles
+            break
+        default:
+            break
         }
     }
 }
