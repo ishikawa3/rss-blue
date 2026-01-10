@@ -11,6 +11,7 @@ struct ContentView: View {
     @State private var newArticleCount = 0
     @State private var showRefreshSuccess = false
     @State private var showAddFeed = false
+    @State private var showSettings = false
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Article.publishedDate, order: .reverse) private var allArticles: [Article]
 
@@ -54,6 +55,43 @@ struct ContentView: View {
             .focusedSceneValue(\.showAddFeed, $showAddFeed)
             .focusedSceneValue(\.refreshAction, refreshFeeds)
             .focusedSceneValue(\.markAllAsReadAction, markAllAsRead)
+        #else
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Button(action: { Task { await refreshFeeds() } }) {
+                            Label("Refresh", systemImage: "arrow.clockwise")
+                        }
+                        .disabled(isRefreshing)
+
+                        Divider()
+
+                        Button(action: { showSettings = true }) {
+                            Label("Settings", systemImage: "gear")
+                        }
+                    } label: {
+                        if isRefreshing {
+                            ProgressView()
+                        } else {
+                            Image(systemName: "ellipsis.circle")
+                        }
+                    }
+                }
+            }
+            .sheet(isPresented: $showSettings) {
+                NavigationStack {
+                    SettingsView()
+                    .navigationTitle("Settings")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button("Done") {
+                                showSettings = false
+                            }
+                        }
+                    }
+                }
+            }
         #endif
         .alert("Refresh Error", isPresented: $showRefreshError) {
             Button("OK") { showRefreshError = false }

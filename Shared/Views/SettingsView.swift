@@ -25,6 +25,9 @@ struct SettingsView: View {
                     Text("1 hour").tag(60)
                     Text("Manual only").tag(0)
                 }
+                .onChange(of: refreshInterval) { _, _ in
+                    rescheduleBackgroundRefresh()
+                }
 
                 #if os(iOS)
                     Toggle("Refresh on Wi-Fi Only", isOn: $refreshOnWiFiOnly)
@@ -140,6 +143,15 @@ struct SettingsView: View {
             importError = error.localizedDescription
             showImportError = true
         }
+    }
+
+    @MainActor
+    private func rescheduleBackgroundRefresh() {
+        #if os(iOS)
+            BackgroundRefreshService.shared.scheduleBackgroundRefresh()
+        #elseif os(macOS)
+            BackgroundRefreshService.shared.startPeriodicRefresh()
+        #endif
     }
 }
 
