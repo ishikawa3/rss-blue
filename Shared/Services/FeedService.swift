@@ -266,6 +266,68 @@ final class FeedService: ObservableObject {
         return newArticleCount
     }
 
+    // MARK: - Full Content Extraction
+
+    private let contentExtractor = ContentExtractorService()
+
+    /// Fetches full content for an article
+    /// - Parameter article: The article to fetch content for
+    /// - Returns: True if content was successfully extracted
+    @discardableResult
+    func fetchFullContent(for article: Article) async throws -> Bool {
+        guard let url = article.url else {
+            return false
+        }
+
+        // Skip if already fetched
+        if article.hasFullContent {
+            return true
+        }
+
+        do {
+            let extracted = try await contentExtractor.extractContent(from: url)
+            article.fullContent = extracted.content
+            article.hasFullContent = true
+
+            // Update author if not set and extracted
+            if article.author == nil, let author = extracted.author {
+                article.author = author
+            }
+
+            try modelContext.save()
+            return true
+        } catch {
+            // Log error but don't throw - full content is optional
+            print("[FeedService] Failed to fetch full content for \(url): \(error)")
+            return false
+        }
+    }
+
+    /// Fetches full content for all articles in a feed that haven't been fetched yet
+    /// - Parameter feed: The feed to fetch content for
+    /// - Returns: The number of articles successfully fetched
+    func fetchFullContentForFeed(_ feed: Feed) async -> Int {
+        guard feed.fetchFullContent else { return 0 }
+
+        var successCount = 0
+        let articles = (feed.articles ?? []).filter { !$0.hasFullContent && $0.url != nil }
+
+        for article in articles {
+            do {
+                if try await fetchFullContent(for: article) {
+                    successCount += 1
+                }
+            } catch {
+                // Continue with other articles
+            }
+
+            // Small delay to avoid overwhelming servers
+            try? await Task.sleep(nanoseconds: 100_000_000)  // 100ms
+        }
+
+        return successCount
+    }
+
     // MARK: - OPML Import/Export
 
     /// Result of an OPML import operation
