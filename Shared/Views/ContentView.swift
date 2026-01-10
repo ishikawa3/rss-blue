@@ -13,6 +13,7 @@ struct ContentView: View {
     @State private var showAddFeed = false
     @State private var showSettings = false
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.pendingArticleId) private var pendingArticleId
     @Query(sort: \Article.publishedDate, order: .reverse) private var allArticles: [Article]
 
     var body: some View {
@@ -111,6 +112,31 @@ struct ContentView: View {
             if let article = newValue {
                 article.isRead = true
             }
+        }
+        .onChange(of: pendingArticleId.wrappedValue) { _, articleId in
+            handlePendingArticle(articleId: articleId)
+        }
+    }
+
+    private func handlePendingArticle(articleId: String?) {
+        guard let articleIdString = articleId,
+            let articleUUID = UUID(uuidString: articleIdString)
+        else { return }
+
+        // Find the article by id
+        if let article = allArticles.first(where: { $0.id == articleUUID }) {
+            // Navigate to the article's feed first
+            if let feed = article.feed {
+                selectedFeedSelection = .feed(feed)
+            }
+
+            // Select the article with a small delay to allow the timeline to update
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                selectedArticle = article
+            }
+
+            // Clear the pending article id
+            pendingArticleId.wrappedValue = nil
         }
     }
 

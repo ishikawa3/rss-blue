@@ -1,6 +1,7 @@
 import Foundation
 import Network
 import SwiftData
+import UserNotifications
 
 #if os(iOS)
     import BackgroundTasks
@@ -173,12 +174,20 @@ final class BackgroundRefreshService: @unchecked Sendable {
         }
 
         var totalNewArticles = 0
+        var newArticleInfos: [(id: String, title: String, feedId: String, feedTitle: String)] = []
 
         for feedInfo in feedsToRefresh {
             if Task.isCancelled { break }
 
-            let newCount = await refreshFeed(urlString: feedInfo.urlString)
+            let (newCount, articles) = await refreshFeedWithArticleInfo(
+                urlString: feedInfo.urlString)
             totalNewArticles += newCount
+            newArticleInfos.append(contentsOf: articles)
+        }
+
+        // Send notifications for new articles
+        if !newArticleInfos.isEmpty {
+            await NotificationService.shared.sendNewArticleNotifications(articles: newArticleInfos)
         }
 
         print("[BackgroundRefresh] Completed. New articles: \(totalNewArticles)")
@@ -221,8 +230,17 @@ final class BackgroundRefreshService: @unchecked Sendable {
     /// Refresh a single feed by URL
     @MainActor
     private func refreshFeed(urlString: String) async -> Int {
+        let (count, _) = await refreshFeedWithArticleInfo(urlString: urlString)
+        return count
+    }
+
+    /// Refresh a single feed by URL and return new article info for notifications
+    @MainActor
+    private func refreshFeedWithArticleInfo(urlString: String) async -> (
+        Int, [(id: String, title: String, feedId: String, feedTitle: String)]
+    ) {
         guard let modelContainer = self.modelContainer else {
-            return 0
+            return (0, [])
         }
 
         let context = modelContainer.mainContext
@@ -237,14 +255,35 @@ final class BackgroundRefreshService: @unchecked Sendable {
 
         do {
             guard let feed = try context.fetch(descriptor).first else {
-                return 0
+                return (0, [])
             }
 
+            // Get existing article IDs before refresh
+            let existingArticleIds = Set(feed.articles?.map { $0.id } ?? [])
+
             let newCount = try await feedService.refreshFeed(feed)
-            return newCount
+
+            // Get new article info for notifications
+            var newArticleInfos: [(id: String, title: String, feedId: String, feedTitle: String)] =
+                []
+
+            if newCount > 0 {
+                let newArticles =
+                    feed.articles?.filter { !existingArticleIds.contains($0.id) } ?? []
+                for article in newArticles {
+                    newArticleInfos.append(
+                        (
+                            id: article.id.uuidString, title: article.title,
+                            feedId: feed.id.uuidString,
+                            feedTitle: feed.title
+                        ))
+                }
+            }
+
+            return (newCount, newArticleInfos)
         } catch {
             print("[BackgroundRefresh] Failed to refresh \(urlString): \(error)")
-            return 0
+            return (0, [])
         }
     }
 }

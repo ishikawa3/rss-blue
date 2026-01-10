@@ -1,12 +1,15 @@
 import SwiftUI
 import UniformTypeIdentifiers
+import UserNotifications
 
 struct SettingsView: View {
     @AppStorage("refreshInterval") private var refreshInterval: Int = 30
     @AppStorage("refreshOnWiFiOnly") private var refreshOnWiFiOnly: Bool = false
+    @AppStorage("notificationsEnabled") private var notificationsEnabled: Bool = true
     @AppStorage("showUnreadOnly") private var showUnreadOnly: Bool = false
     @Environment(\.modelContext) private var modelContext
 
+    @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
     @State private var showImportPicker = false
     @State private var showExportPicker = false
     @State private var exportData: Data?
@@ -35,6 +38,25 @@ struct SettingsView: View {
                 #endif
 
                 Toggle("Show Unread Only", isOn: $showUnreadOnly)
+            }
+
+            Section("Notifications") {
+                Toggle("Enable Notifications", isOn: $notificationsEnabled)
+                    .disabled(notificationStatus == .denied)
+                    .onChange(of: notificationsEnabled) { _, newValue in
+                        if newValue && notificationStatus == .notDetermined {
+                            Task {
+                                _ = await NotificationService.shared.requestAuthorization()
+                                await updateNotificationStatus()
+                            }
+                        }
+                    }
+
+                if notificationStatus == .denied {
+                    Text("Notifications are disabled in System Settings")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             Section("Import & Export") {
@@ -96,6 +118,14 @@ struct SettingsView: View {
         } message: {
             Text(importError ?? "Failed to import OPML")
         }
+        .task {
+            await updateNotificationStatus()
+        }
+    }
+
+    @MainActor
+    private func updateNotificationStatus() async {
+        notificationStatus = await NotificationService.shared.checkAuthorizationStatus()
     }
 
     @MainActor

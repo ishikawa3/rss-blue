@@ -16,6 +16,7 @@ struct RSSBlueApp: App {
     @State private var showImportResult = false
     @State private var importError: String?
     @State private var showImportError = false
+    @State private var pendingArticleId: String?
     @Environment(\.scenePhase) private var scenePhase
 
     init() {
@@ -48,8 +49,20 @@ struct RSSBlueApp: App {
                 // Register background task for iOS
                 BackgroundRefreshService.shared.registerBackgroundTask()
             #endif
+
+            // Set up notification service
+            setupNotificationService()
         } catch {
             fatalError("Failed to initialize ModelContainer: \(error)")
+        }
+    }
+
+    private func setupNotificationService() {
+        // Handle notification tap
+        NotificationService.shared.onNotificationTapped = { articleId in
+            Task { @MainActor in
+                self.pendingArticleId = articleId
+            }
         }
     }
 
@@ -89,6 +102,11 @@ struct RSSBlueApp: App {
                 .onChange(of: scenePhase) { oldPhase, newPhase in
                     handleScenePhaseChange(from: oldPhase, to: newPhase)
                 }
+                .task {
+                    // Request notification permission on first launch
+                    await requestNotificationPermissionIfNeeded()
+                }
+                .environment(\.pendingArticleId, $pendingArticleId)
         }
         .modelContainer(modelContainer)
         #if os(macOS)
@@ -189,6 +207,28 @@ struct RSSBlueApp: App {
         @unknown default:
             break
         }
+    }
+
+    @MainActor
+    private func requestNotificationPermissionIfNeeded() async {
+        let status = await NotificationService.shared.checkAuthorizationStatus()
+
+        if status == .notDetermined {
+            _ = await NotificationService.shared.requestAuthorization()
+        }
+    }
+}
+
+// MARK: - Environment Keys
+
+private struct PendingArticleIdKey: EnvironmentKey {
+    static let defaultValue: Binding<String?> = .constant(nil)
+}
+
+extension EnvironmentValues {
+    var pendingArticleId: Binding<String?> {
+        get { self[PendingArticleIdKey.self] }
+        set { self[PendingArticleIdKey.self] = newValue }
     }
 }
 

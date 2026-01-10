@@ -23,6 +23,7 @@
 		249911F6C2170AA518820F63 /* FeedSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53D58C86732DE74DECF52F6 /* FeedSelection.swift */; };
 		2C39C10FFF29431C297377ED /* OPMLServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D15AEF20195602CCCE686C /* OPMLServiceTests.swift */; };
 		2F7BF22E70AE3DC5603139E0 /* TimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CECC897E3C72023B31CE163 /* TimelineView.swift */; };
+		312A3CDD17FD06A3A02073F6 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DBB6AC33B138B5B1DF8FC5 /* NotificationService.swift */; };
 		3424ABCA2D84853E4FE99429 /* FeedServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55068B9C30D8B127DAEB7CC6 /* FeedServiceTests.swift */; };
 		34EAD8E55B4F57E0089D6972 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EEF85A53506A1FFE05CF83 /* Article.swift */; };
 		370BD51CA019E8AC439B0180 /* FeedServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55068B9C30D8B127DAEB7CC6 /* FeedServiceTests.swift */; };
@@ -47,6 +48,7 @@
 		ABD5E432A578CC3616DB2B89 /* RSSBlueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31393F6E0BAD76021250CD /* RSSBlueApp.swift */; };
 		AE1E3E2DEB6DCF456EE02AA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D8BD925FE2EDB9FF077D3A /* Assets.xcassets */; };
 		B0CC269D0B45A38A0956D482 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */; };
+		B16547A16063CB9732C8CEE3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DBB6AC33B138B5B1DF8FC5 /* NotificationService.swift */; };
 		B7914915FE9BF10A3D7F240C /* OPMLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B219496D7600ABE330E3C7F /* OPMLService.swift */; };
 		BAC6C24706620030CEC0FCE3 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E672CDD0843B3F247F3DFFE /* Feed.swift */; };
 		BB082AAB2DF0F51047C8D1DC /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912CBB60266A90A5145E032A /* FolderService.swift */; };
@@ -122,6 +124,7 @@
 		E3FCBD39898E9F3D2E56D339 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		F0792DB19E4A98B1736EFF14 /* FeedParserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParserService.swift; sourceTree = "<group>"; };
 		F31CB2EB07A7ABB54E60781F /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
+		F9DBB6AC33B138B5B1DF8FC5 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,7 @@
 				F0792DB19E4A98B1736EFF14 /* FeedParserService.swift */,
 				2AB4EDD43443DBAB965BBA4C /* FeedService.swift */,
 				912CBB60266A90A5145E032A /* FolderService.swift */,
+				F9DBB6AC33B138B5B1DF8FC5 /* NotificationService.swift */,
 				0B219496D7600ABE330E3C7F /* OPMLService.swift */,
 				E3FCBD39898E9F3D2E56D339 /* SearchService.swift */,
 			);
@@ -504,6 +508,7 @@
 				F8D521ECE364D70B0D981435 /* FocusedValues.swift in Sources */,
 				7BD935EF1CF4044C7760BFB0 /* Folder.swift in Sources */,
 				E0493EE14F6D2C14693CAC17 /* FolderService.swift in Sources */,
+				312A3CDD17FD06A3A02073F6 /* NotificationService.swift in Sources */,
 				FF681BE39A2889C3D8998F5A /* OPMLService.swift in Sources */,
 				ABD5E432A578CC3616DB2B89 /* RSSBlueApp.swift in Sources */,
 				F06BD2D611D75CC9555F4D28 /* SearchService.swift in Sources */,
@@ -531,6 +536,7 @@
 				1D45E7B87EFA631BDA4ECF2F /* FocusedValues.swift in Sources */,
 				F08EDA6A3411AF55429A3B5A /* Folder.swift in Sources */,
 				BB082AAB2DF0F51047C8D1DC /* FolderService.swift in Sources */,
+				B16547A16063CB9732C8CEE3 /* NotificationService.swift in Sources */,
 				B7914915FE9BF10A3D7F240C /* OPMLService.swift in Sources */,
 				DB5E773921E98AE7AE7F15F0 /* RSSBlueApp.swift in Sources */,
 				FB6DC2F242CD01B06AAB2F68 /* SearchService.swift in Sources */,
