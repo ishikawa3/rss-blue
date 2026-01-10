@@ -7,6 +7,7 @@ struct SettingsView: View {
     @AppStorage("refreshOnWiFiOnly") private var refreshOnWiFiOnly: Bool = false
     @AppStorage("notificationsEnabled") private var notificationsEnabled: Bool = true
     @AppStorage("showUnreadOnly") private var showUnreadOnly: Bool = false
+    @AppStorage("fetchFullContentByDefault") private var fetchFullContentByDefault: Bool = false
     @Environment(\.modelContext) private var modelContext
 
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
@@ -38,6 +39,13 @@ struct SettingsView: View {
                 #endif
 
                 Toggle("Show Unread Only", isOn: $showUnreadOnly)
+            }
+
+            Section("Content") {
+                Toggle("Fetch Full Article Content", isOn: $fetchFullContentByDefault)
+                Text("When enabled, full article content will be fetched from the original webpage for new feeds. This can be overridden per feed.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
 
             Section("Notifications") {

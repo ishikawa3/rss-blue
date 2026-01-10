@@ -12,6 +12,9 @@ final class Feed {
     var lastUpdated: Date?
     var sortOrder: Int = 0
 
+    /// Whether to fetch full article content for this feed
+    var fetchFullContent: Bool = false
+
     @Relationship(deleteRule: .cascade, inverse: \Article.feed)
     var articles: [Article]?
 
@@ -30,5 +33,6 @@ final class Feed {
         self.id = UUID()
         self.title = title
         self.urlString = url.absoluteString
+        self.fetchFullContent = false
     }
 }

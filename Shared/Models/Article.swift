@@ -13,6 +13,12 @@ final class Article {
     var isRead: Bool = false
     var isStarred: Bool = false
 
+    /// Full article content extracted from the original webpage
+    var fullContent: String?
+
+    /// Whether full content has been fetched for this article
+    var hasFullContent: Bool = false
+
     // CloudKit requires optional relationships
     var feed: Feed?
 
@@ -22,5 +28,6 @@ final class Article {
         self.feed = feed
         self.isRead = false
         self.isStarred = false
+        self.hasFullContent = false
     }
 }
